@@ -19,7 +19,7 @@ public class ResultGameDlg : MonoBehaviour
     {
         gameObject.SetActive(true);
 
-        PrintDurationTime();
+        //PrintDurationTime();
     }
 
     public void CloseUI()
@@ -30,29 +30,29 @@ public class ResultGameDlg : MonoBehaviour
 
     public void OnClicked_Restart()
     {
-        GameScene kGameScene = GameMgr.Inst.gameScene;
-        kGameScene.ResetGame();
+        //GameScene kGameScene = GameMgr.Inst.gameScene;
+        //kGameScene.ResetGame();
         CloseUI();
     }
 
     public void OnClicked_Exit()
     {
-        GameScene kGameScene = GameMgr.Inst.gameScene;
-        kGameScene.ExitGame();
+        //GameScene kGameScene = GameMgr.Inst.gameScene;
+        //kGameScene.ExitGame();
         CloseUI();
     }
-    public void PrintDurationTime()
-    {
-        if (m_txtTime != null)
-        {
-            GameInfo kGameInfo = GameMgr.Inst.m_GameInfo;
-            int nMinute = (int)(kGameInfo.m_fDurationTime / 60);
-            int nSecond = (int)(kGameInfo.m_fDurationTime % 60);
+    //public void PrintDurationTime()
+    //{
+    //    if (m_txtTime != null)
+    //    {
+    //        GameInfo kGameInfo = GameMgr.Inst.m_GameInfo;
+    //        int nMinute = (int)(kGameInfo.m_fDurationTime / 60);
+    //        int nSecond = (int)(kGameInfo.m_fDurationTime % 60);
 
-            string sTime = string.Format("{0:00}:{1:00}", nMinute, nSecond);
+    //        string sTime = string.Format("{0:00}:{1:00}", nMinute, nSecond);
 
-            m_txtTime.text = sTime;
-        }
-    }
+    //        m_txtTime.text = sTime;
+    //    }
+    //}
 
 }
