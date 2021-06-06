@@ -24,8 +24,8 @@ public class StartMenuDlg : MonoBehaviour
 
     public void OnClicked_Start()
     {
-        //GameScene kGameScene = GameMgr.Inst.gameScene;
-        //kGameScene.m_BattleFSM.SetReadyState();
+        GameScene kGameScene = GameMgr.Inst.gameScene;
+        kGameScene.m_BattleFSM.SetReadyState();
 
         CloseUI();
     }

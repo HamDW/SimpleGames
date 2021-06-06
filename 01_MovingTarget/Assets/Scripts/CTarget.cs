@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameUI : MonoBehaviour
+public class CTarget : MonoBehaviour
 {
-    public CGun m_Gun = null;
-    public Transform m_trOffstPos = null;
-    public float m_OffsetScale = 0.5f;
+    public bool m_bMove = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -14,10 +13,12 @@ public class GameUI : MonoBehaviour
         
     }
 
-    public void Initialize()
+    public void Initialize(bool bMove)
     {
-
+        m_bMove = bMove;
     }
+
+
 
 
     // Update is called once per frame
