@@ -10,7 +10,8 @@ public class GameScene : MonoBehaviour
 
     private void Awake()
     {
-        
+        GameMgr.Inst.Initialize();
+        GameMgr.Inst.gameScene = this;   
     }
 
     // Start is called before the first frame update
@@ -22,7 +23,7 @@ public class GameScene : MonoBehaviour
 
     void Call_ReadyEnter()
     {
-
+        m_HudUI.StartReadyCount();
     }
 
     void Call_WaveEnter()
@@ -42,8 +43,9 @@ public class GameScene : MonoBehaviour
     }
 
     public void ResetGame()
-    { 
-
+    {
+        m_GameUI.Initialize();
+        m_HudUI.Initialize();
     }
 
     public void ExitGame()

@@ -5,7 +5,7 @@ using UnityEngine;
 public class CTarget : MonoBehaviour
 {
     public bool m_bMove = false;
-
+    public float m_Speed = 1.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +24,6 @@ public class CTarget : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.Translate(Vector3.left * m_Speed * Time.deltaTime * 100);
     }
 }

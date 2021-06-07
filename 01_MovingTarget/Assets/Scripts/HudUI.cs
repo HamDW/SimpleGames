@@ -88,6 +88,7 @@ public class HudUI : MonoBehaviour
         }
 
         this.ShowTextCount(false);
+        GameMgr.Inst.gameScene.m_BattleFSM.SetGameState();
 
         yield return null;
     }
