@@ -34,7 +34,7 @@ public class ResultGameDlg : MonoBehaviour
     public void OnClicked_Restart()
     {
         GameScene kGameScene = GameMgr.Inst.gameScene;
-        kGameScene.ResetGame();
+        kGameScene.SetReadyState();
         CloseUI();
     }
 
@@ -48,13 +48,8 @@ public class ResultGameDlg : MonoBehaviour
     {
         if (m_txtScore != null)
         {
-            GameInfo kGameInfo = GameMgr.Inst.m_GameInfo;
-            //int nMinute = (int)(kGameInfo.m_fDurationTime / 60);
-            //int nSecond = (int)(kGameInfo.m_fDurationTime % 60);
-
-            //string sTime = string.Format("{0:00}:{1:00}", nMinute, nSecond);
-
-            //m_txtTime.text = sTime;
+            int nScore = GameMgr.Inst.GetScore();
+            m_txtScore.text = string.Format("점수 : {0}", nScore);
         }
     }
 

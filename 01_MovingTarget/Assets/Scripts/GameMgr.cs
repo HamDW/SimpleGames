@@ -15,20 +15,43 @@ public class GameMgr
         }
     }
 
-
+    public bool IsInstalled { get; set; }
     public GameScene gameScene { get; set; }
-
     public GameInfo m_GameInfo = new GameInfo();
 
 
     public void Initialize()
     {
+        IsInstalled = true;
+    }
+
+    public void InitGameStart()
+    {
         m_GameInfo.Initialize();
     }
+
+ 
 
 
     public void OnUpdate(float fElasedTime)
     {
         m_GameInfo.OnUpdate(fElasedTime);        
+
+        if( m_GameInfo.GetRemainTime() <= 0 )
+        {
+            gameScene.m_BattleFSM.SetResultState();
+        }
     }
+
+
+    public void AddScore( int nScore)
+    {
+        m_GameInfo.AddScore(nScore);
+    }
+
+    public int GetScore()
+    {
+        return m_GameInfo.m_nScore;
+    }
+
 }

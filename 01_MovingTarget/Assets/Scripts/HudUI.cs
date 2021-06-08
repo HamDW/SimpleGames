@@ -10,17 +10,19 @@ public class HudUI : MonoBehaviour
 
     [SerializeField] Text m_txtTime = null;
     [SerializeField] Text m_txtCount = null;
-    // Start is called before the first frame update
-    // Start is called before the first frame update
+    [SerializeField] Text m_txtScore = null;
+
     void Start()
     {
-        ShowTextTime(false);
+        ShowTopUI(false);
         OpenMenuDlg();
     }
 
+    // √ ±‚»≠
     public void Initialize()
     {
-        ShowTextTime(true);
+        
+        ShowTopUI(true);
         PrintDurationTime();
     }
 
@@ -32,10 +34,13 @@ public class HudUI : MonoBehaviour
     {
         m_MenuDlg.OpenUI();
     }
-    public void ShowTextTime(bool bShow)
+    public void ShowTopUI(bool bShow)
     {
         if (m_txtTime != null)
             m_txtTime.gameObject.SetActive(bShow);
+
+        if( m_txtScore != null)
+            m_txtScore.gameObject.SetActive(bShow);
     }
 
     public void PrintDurationTime()
@@ -62,6 +67,12 @@ public class HudUI : MonoBehaviour
     public void ShowTextCount(bool bShow)
     {
         m_txtCount.gameObject.SetActive(bShow);
+    }
+
+    public void PrintScore()
+    {
+        int nScore = GameMgr.Inst.GetScore();
+        m_txtScore.text = "Hit : " + nScore;
     }
 
 
@@ -95,9 +106,9 @@ public class HudUI : MonoBehaviour
 
 
 
-    public void SetResultEnter()
+    public void SetGameResultEnter()
     {
-        ShowTextTime(false);
+        ShowTopUI(false);
         OpenResultUI();
     }
 

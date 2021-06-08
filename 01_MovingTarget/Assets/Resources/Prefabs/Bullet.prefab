@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 987812670805584331}
   - component: {fileID: 5388142581967212312}
   - component: {fileID: 4989647028165026370}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 5034694607065080987}
   - component: {fileID: 5034694607080284635}
   - component: {fileID: 5034694607080380539}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sparkles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4803,7 +4803,7 @@ GameObject:
   - component: {fileID: 5034694607065080989}
   - component: {fileID: 5034694607080284637}
   - component: {fileID: 5034694607080380541}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9459,7 +9459,7 @@ GameObject:
   - component: {fileID: 5034694607080284639}
   - component: {fileID: 5034694607080380543}
   - component: {fileID: 5034694607055326559}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FX_Fire Natural
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14112,7 +14112,7 @@ GameObject:
   - component: {fileID: 8198853904379687194}
   - component: {fileID: 8970807768914606986}
   - component: {fileID: 359567880217709625}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TailBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}

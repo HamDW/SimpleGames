@@ -30,26 +30,32 @@ public class GameScene : MonoBehaviour
 
     void Call_GameEnter()
     {
-        m_GameUI.Initialize();
-        m_HudUI.Initialize();
-        Cursor.visible = false;
+        GameStart();
     }
 
     void Call_ResultEnter()
     {
         Cursor.visible = true;
-        m_GameUI.SetGameReuslt();
+        m_GameUI.SetGameResultEnter();
+        m_HudUI.SetGameResultEnter();
     }
 
-    public void ResetGame()
+    public void GameStart()
     {
+        GameMgr.Inst.InitGameStart();
         m_GameUI.Initialize();
         m_HudUI.Initialize();
+        Cursor.visible = false;
+    }
+
+    public void SetReadyState()
+    {
+        m_BattleFSM.SetReadyState();
     }
 
     public void ExitGame()
     {
-
+        m_HudUI.OpenMenuDlg();
     }
 
     // Update is called once per frame

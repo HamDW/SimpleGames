@@ -6,10 +6,13 @@ public class GameUI : MonoBehaviour
 {
     public CGun m_Gun = null;
     public Transform m_trOffstPos = null;
-    public float m_OffsetScale = 0.5f;
 
-    public bool m_bMoveStart = false;
-    private CTarget m_Target = null;
+    public GameObject m_prefabTarget;
+    public Transform m_TargetParent;
+
+    public float m_FireDelay = 2.0f;
+    [HideInInspector] public bool m_bMoveStart = false;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -33,14 +36,19 @@ public class GameUI : MonoBehaviour
         {
             CreateTarget();
             
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(m_FireDelay); //0.3f
         }
     }
 
 
     public void CreateTarget()
     {
+        GameObject go = Instantiate(m_prefabTarget, m_TargetParent);
+        go.transform.position = m_trOffstPos.position;
+        go.transform.localScale = m_prefabTarget.transform.localScale;
 
+        CTarget kTarget = go.GetComponent<CTarget>();
+        kTarget.Initialize(true);
     }
 
 
@@ -56,27 +64,41 @@ public class GameUI : MonoBehaviour
         }
     }
 
-    public void RayCastTestForMouseCursor()
+  
+    public void SetGameResultEnter()
     {
-        RaycastHit hit;
-        Vector3 vPos = Input.mousePosition;
-        //vPos.z = -Camera.main.transform.position.z;
-        Ray ray = Camera.main.ScreenPointToRay(vPos);
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-        {
-            m_Gun.Fire();
-
-            Debug.LogFormat("hit point = ({0}, {1}, {2})", hit.point.x, hit.point.y, hit.point.z);
-            Vector3 vDir = hit.point - m_Gun.m_BulletStartPos.position;
-            Debug.DrawRay(m_Gun.m_BulletStartPos.position, vDir , Color.red, 3.0f);
-        }
-    }
-
-    public void SetGameReuslt()
-    {
+        m_bMoveStart = false;
+        DestroyAllTarget();
         m_Gun.SetIsCanFire(false);
     }
 
+
+    public void DestroyAllTarget()
+    {
+        CTarget[] listTarget = m_TargetParent.GetComponentsInChildren<CTarget>();
+        for( int i = 0; i < listTarget.Length; i++ )
+        {
+            if(listTarget[i].gameObject != null)
+                Destroy(listTarget[i].gameObject, 0.1f);
+        }
+    }
+
+
+    //public void RayCastTestForMouseCursor()
+    //{
+    //    RaycastHit hit;
+    //    Vector3 vPos = Input.mousePosition;
+    //    //vPos.z = -Camera.main.transform.position.z;
+    //    Ray ray = Camera.main.ScreenPointToRay(vPos);
+    //    if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+    //    {
+    //        m_Gun.Fire();
+
+    //        Debug.LogFormat("hit point = ({0}, {1}, {2})", hit.point.x, hit.point.y, hit.point.z);
+    //        Vector3 vDir = hit.point - m_Gun.m_BulletStartPos.position;
+    //        Debug.DrawRay(m_Gun.m_BulletStartPos.position, vDir, Color.red, 3.0f);
+    //    }
+    //}
 
 
 }
