@@ -26,20 +26,19 @@ public class GameScene : MonoBehaviour
         m_HudUI.StartReadyCount();
     }
 
-    void Call_WaveEnter()
-    {
-
-    }
+    void Call_WaveEnter()  {  }
 
     void Call_GameEnter()
     {
         m_GameUI.Initialize();
         m_HudUI.Initialize();
+        Cursor.visible = false;
     }
 
     void Call_ResultEnter()
     {
-
+        Cursor.visible = true;
+        m_GameUI.SetGameReuslt();
     }
 
     public void ResetGame()

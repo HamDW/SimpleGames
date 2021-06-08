@@ -40,6 +40,6 @@ public class Bullet : MonoBehaviour
     // ¿Ãµø
     public void Move(Vector3 vDir)
     {
-        transform.Translate(vDir * m_Speed * Time.deltaTime, Space.World);
+        transform.Translate(vDir * m_Speed * Time.deltaTime * 100, Space.World);
     }
 }
