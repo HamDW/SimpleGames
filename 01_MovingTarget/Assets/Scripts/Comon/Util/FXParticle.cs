@@ -23,7 +23,7 @@ public class FXParticle : MonoBehaviour
     public void Play()
     {
 		Stop();
-		Invoke("Callback_StartFX", 0.1f);
+		Invoke("Callback_StartFX", 0.01f);
 	}
 
 

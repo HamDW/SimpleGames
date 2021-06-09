@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameInfo
 {
-    public  float m_fMaxTime = 10.0f;       // 게임 전체 시간
+    public  float m_fMaxTime = 30.0f;       // 게임 전체 시간
     private float m_fCurTime = 0;           // 게임 경과 시간
     public int m_nScore = 0;                // 점수
 

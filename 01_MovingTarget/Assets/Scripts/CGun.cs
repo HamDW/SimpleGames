@@ -9,10 +9,13 @@ public class CGun : MonoBehaviour
     public Transform m_BulletStartPos = null;     // 총알 발사 시작점
     private bool m_IsCanFire = false;               // 사격 가능한가?
 
+    private AudioSource m_Audio = null;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        m_Audio = GetComponent<AudioSource>();
         m_IsCanFire = false;
     }
 
@@ -65,6 +68,8 @@ public class CGun : MonoBehaviour
         {
             CreateBullet(hit.point);
 
+            m_Audio.PlayOneShot(m_Audio.clip);
+
             //Debug.LogFormat("hit point = ({0}, {1}, {2})", hit.point.x, hit.point.y, hit.point.z);
             //Vector3 vDir = hit.point - m_BulletStartPos.position;
             //Debug.DrawRay(m_BulletStartPos.position, vDir, Color.red, 3.0f);
@@ -83,6 +88,8 @@ public class CGun : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, layerMask))
         {
             CreateBullet(hit.point);
+
+            m_Audio.PlayOneShot(m_Audio.clip);
 
             Debug.LogFormat("hit point = ({0}, {1}, {2})", hit.point.x, hit.point.y, hit.point.z);
             Vector3 vDir = hit.point - m_BulletStartPos.position;
