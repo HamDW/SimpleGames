@@ -48,7 +48,7 @@ public class GameScene : MonoBehaviour
         Cursor.visible = false;
     }
 
-    public void SetReadyState()
+    public void ResetGame()
     {
         m_BattleFSM.SetReadyState();
     }
@@ -56,6 +56,7 @@ public class GameScene : MonoBehaviour
     public void ExitGame()
     {
         m_HudUI.OpenMenuDlg();
+        m_BattleFSM.SetNoneState();
     }
 
     // Update is called once per frame

@@ -34,7 +34,7 @@ public class ResultGameDlg : MonoBehaviour
     public void OnClicked_Restart()
     {
         GameScene kGameScene = GameMgr.Inst.gameScene;
-        kGameScene.SetReadyState();
+        kGameScene.ResetGame();
         CloseUI();
     }
 
