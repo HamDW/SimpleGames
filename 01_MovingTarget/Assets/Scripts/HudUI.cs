@@ -51,7 +51,7 @@ public class HudUI : MonoBehaviour
             int nMinute = (int)(kGameInfo.durationTime / 60);
             int nSecond = (int)(kGameInfo.durationTime % 60);
 
-            string sTime = string.Format("Time {0:00}:{1:00}", nMinute, nSecond);
+            string sTime = string.Format("{0:00}:{1:00}", nMinute, nSecond);
 
             m_txtTime.text = sTime;
         }

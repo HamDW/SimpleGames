@@ -49,7 +49,7 @@ public class ResultGameDlg : MonoBehaviour
         if (m_txtScore != null)
         {
             int nScore = GameMgr.Inst.GetScore();
-            m_txtScore.text = string.Format("점수 : {0}", nScore);
+            m_txtScore.text = string.Format("Score  :  {0}", nScore);
         }
     }
 
