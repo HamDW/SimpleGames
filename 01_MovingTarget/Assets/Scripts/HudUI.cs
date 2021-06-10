@@ -24,6 +24,7 @@ public class HudUI : MonoBehaviour
         
         ShowTopUI(true);
         PrintDurationTime();
+
     }
 
     public void OpenResultUI()
