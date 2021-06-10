@@ -73,7 +73,7 @@ public class HudUI : MonoBehaviour
     public void PrintScore()
     {
         int nScore = GameMgr.Inst.GetScore();
-        m_txtScore.text = "Hit : " + nScore;
+        m_txtScore.text = nScore.ToString();
     }
 
 

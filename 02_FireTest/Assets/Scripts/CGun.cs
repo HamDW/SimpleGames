@@ -48,7 +48,7 @@ public class CGun : MonoBehaviour
 
     public bool Fire()
     {
-        m_gunAnimator.SetTrigger("Fire");
+        //m_gunAnimator.SetTrigger("Fire");
         return RayCastTest();
     }
 

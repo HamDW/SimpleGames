@@ -5,29 +5,37 @@ using UnityEngine;
 public class CTarget : MonoBehaviour
 {
     [SerializeField] GameObject m_Body = null;
-    public float m_Speed = 1.0f;
     public FXParticle m_Explsion = null;
 
     [HideInInspector] public bool m_IsDead = false;           // 충돌 2번 되는것 방지
-    [HideInInspector] public bool m_bMove = false;
-
+    
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(gameObject, 10.0f);
+        
     }
 
-    public void Initialize(bool bMove)
+    public void Show()
     {
-        m_bMove = bMove;
+        gameObject.SetActive(true);
     }
 
-
-    // Update is called once per frame
-    void Update()
+  
+    public void Initialize()
     {
-        if(m_bMove )
-            transform.Translate(Vector3.left * m_Speed * Time.deltaTime * 10);
+        Show();
+        Invoke("HideTarget", 3.0f);
+    }
+
+    void HideTarget()
+    {
+        gameObject.SetActive(false);
+        Destroy(gameObject, 0.5f);
+    }
+    private void Update()
+    {
+        transform.Translate(Vector3.left * 0.0001f);
+        transform.Translate(Vector3.right * 0.0001f);
     }
 
 
@@ -35,7 +43,7 @@ public class CTarget : MonoBehaviour
     {
         if (collision.gameObject.tag == "Bullet")
         {
-            if (!m_IsDead)
+            //if (!m_IsDead)
             {
                 m_Explsion.Play();
                 GameMgr.Inst.AddScore(1);
@@ -44,7 +52,9 @@ public class CTarget : MonoBehaviour
                 m_IsDead = true;
                 m_Body.SetActive(false);
                 Destroy(collision.gameObject, 0.001f);
-                Destroy(gameObject, 0.4f);
+                
+                
+                Destroy(gameObject, 0.5f);
             }
         }
     }

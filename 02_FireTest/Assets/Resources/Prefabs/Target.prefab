@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6548310435966713375}
   - component: {fileID: 7647160114818662215}
   - component: {fileID: 7345757182531025293}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Target
   m_TagString: Target
   m_Icon: {fileID: 0}
@@ -48,10 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Body: {fileID: 7345757181373176330}
-  m_Speed: 1
   m_Explsion: {fileID: 2929889688006075158}
   m_IsDead: 0
-  m_bMove: 0
 --- !u!65 &7647160114818662215
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -61,9 +59,9 @@ BoxCollider:
   m_GameObject: {fileID: 4471731570805539597}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 0.3}
+  m_Size: {x: 10, y: 10, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &7345757182531025293
 Rigidbody:
@@ -93,7 +91,7 @@ GameObject:
   - component: {fileID: 7345757181373176334}
   - component: {fileID: 7345757181373176335}
   - component: {fileID: 7345757181373176328}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +170,7 @@ MeshCollider:
   m_GameObject: {fileID: 7345757181373176330}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
@@ -188,7 +186,7 @@ GameObject:
   - component: {fileID: 7951214325251243664}
   - component: {fileID: 7951214325236038608}
   - component: {fileID: 7951214325236056688}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Explosion Big
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5053,7 +5051,7 @@ GameObject:
   - component: {fileID: 7951214325251243666}
   - component: {fileID: 7951214325236038610}
   - component: {fileID: 7951214325236056690}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glow sparkles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9828,7 +9826,7 @@ GameObject:
   - component: {fileID: 7951214325251243668}
   - component: {fileID: 7951214325236038612}
   - component: {fileID: 7951214325236056692}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14670,7 +14668,7 @@ GameObject:
   - component: {fileID: 7951214325251243670}
   - component: {fileID: 7951214325236038614}
   - component: {fileID: 7951214325236056694}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dot Sparkles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19467,7 +19465,7 @@ GameObject:
   - component: {fileID: 7951214325251243676}
   - component: {fileID: 7951214325236038620}
   - component: {fileID: 7951214325236056700}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24335,7 +24333,7 @@ GameObject:
   - component: {fileID: 7951214325244565334}
   - component: {fileID: 2929889688006075158}
   - component: {fileID: 5226787197637999641}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WFX_Explosion Simple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
