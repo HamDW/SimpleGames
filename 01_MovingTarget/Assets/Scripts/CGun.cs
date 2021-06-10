@@ -6,9 +6,10 @@ public class CGun : MonoBehaviour
 {
     [SerializeField] GameObject m_PrefabBullet = null;      // 총알 프리팹
     [SerializeField] Transform m_BulletParent = null;       // 총알들 부모 노드
-    public Transform m_BulletStartPos = null;     // 총알 발사 시작점
-    private bool m_IsCanFire = false;               // 사격 가능한가?
-
+    public Transform m_BulletStartPos = null;               // 총알 발사 시작점
+    [SerializeField] private Animator m_gunAnimator = null;
+    
+    private bool m_IsCanFire = false;                       // 사격 가능한가?
     private AudioSource m_Audio = null;
 
 
@@ -47,6 +48,7 @@ public class CGun : MonoBehaviour
 
     public bool Fire()
     {
+        m_gunAnimator.SetTrigger("Fire");
         return RayCastTest();
     }
 
