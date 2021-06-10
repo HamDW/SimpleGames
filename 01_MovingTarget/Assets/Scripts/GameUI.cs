@@ -10,7 +10,7 @@ public class GameUI : MonoBehaviour
     public GameObject m_prefabTarget;
     public Transform m_TargetParent;
 
-    public float m_FireDelay = 2.0f;
+    public float m_CreateDelay = 2.0f;
     [HideInInspector] public bool m_bMoveStart = false;
     
 
@@ -36,7 +36,7 @@ public class GameUI : MonoBehaviour
         {
             CreateTarget();
             
-            yield return new WaitForSeconds(m_FireDelay); //0.3f
+            yield return new WaitForSeconds(m_CreateDelay); //0.3f
         }
     }
 
