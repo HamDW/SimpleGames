@@ -8,6 +8,9 @@ public class CTarget : MonoBehaviour
     public FXParticle m_Explsion = null;
 
     [HideInInspector] public bool m_IsDead = false;           // 충돌 2번 되는것 방지
+
+    Vector3 m_vDir = Vector3.zero;
+    float m_Speed = 1.0f;
     
     // Start is called before the first frame update
     void Start()
@@ -24,7 +27,34 @@ public class CTarget : MonoBehaviour
     public void Initialize()
     {
         Show();
-        Invoke("HideTarget", 3.0f);
+        MakeRandomDir();
+
+        Invoke("HideTarget", 10.0f);
+    }
+
+    void MakeRandomDir()
+    {
+        int nValue = Random.Range(0, 5);
+        switch(nValue)
+        {
+            case 0:
+                m_vDir = Vector3.left;
+                break;
+            case 1:
+                m_vDir = Vector3.right;
+                break;
+            case 2:
+                m_vDir = Vector3.down;
+                break;
+            case 3:
+                m_vDir = new Vector3(1,-1, 0);
+                m_vDir.Normalize();
+                break;
+            case 4:
+                m_vDir = new Vector3(-1, -1, 0);
+                m_vDir.Normalize();
+                break;
+        }
     }
 
     void HideTarget()
@@ -34,8 +64,7 @@ public class CTarget : MonoBehaviour
     }
     private void Update()
     {
-        transform.Translate(Vector3.left * 0.0001f);
-        transform.Translate(Vector3.right * 0.0001f);
+        transform.Translate(m_vDir * m_Speed * Time.deltaTime * 10);
     }
 
 

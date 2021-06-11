@@ -62,9 +62,9 @@ public class GameUI : MonoBehaviour
     {
         int x = Random.Range((int)m_Left, (int)m_Right);
         int y = Random.Range((int)m_Bottom, (int)m_Up);
-        int z = Random.Range((int)m_Depth - 5, (int)m_Depth + 5);
+        int z = Random.Range((int)m_Depth - 10, (int)m_Depth + 8);
 
-        return new Vector3(x, y, m_Depth);
+        return new Vector3(x, y, z);
     }
 
 
