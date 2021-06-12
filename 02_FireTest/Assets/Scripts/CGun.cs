@@ -12,8 +12,12 @@ public class CGun : MonoBehaviour
     private bool m_IsCanFire = false;                       // 사격 가능한가?
     private AudioSource m_Audio = null;
 
+    private Vector3 m_OffsetPos;
 
-    // Start is called before the first frame update
+    void Awake()
+    {
+        m_OffsetPos = transform.position;    
+    }
     void Start()
     {
         m_Audio = GetComponent<AudioSource>();
@@ -30,6 +34,11 @@ public class CGun : MonoBehaviour
     public void Initialize()
     {
         m_IsCanFire = true;
+    }
+
+    public void ResetPosition()
+    {
+        transform.position = m_OffsetPos;
     }
 
     public void SetIsCanFire(bool bState)

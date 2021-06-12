@@ -11,10 +11,10 @@ public class GameUI : MonoBehaviour
     public float m_CreateDelay = 1.0f;
     
     [Header("타겟 생성 범위")]
-    public float m_Left = -22.0f;       // 왼쪽
-    public float m_Right = 22.0f;       // 오른쪽
-    public float m_Bottom = 0.0f;       // 하단
-    public float m_Up = 15.0f;          // 상단
+    public float m_Left = -3.0f;       // 왼쪽
+    public float m_Right = 3.0f;       // 오른쪽
+    public float m_Bottom = 12.0f;       // 하단
+    public float m_Up = 12.0f;          // 상단
     public float m_Depth = 20.0f;       // 깊이( z값 )
 
 
@@ -86,6 +86,7 @@ public class GameUI : MonoBehaviour
         m_bCreate = false;
         DestroyAllTarget();
         m_Gun.SetIsCanFire(false);
+        m_Gun.ResetPosition();
     }
 
 
