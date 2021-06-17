@@ -26,7 +26,7 @@ public class GameUI : MonoBehaviour
 
         // 타겟 생성 시작
         m_bMoveStart = true;
-        StartCoroutine(EnumFunc_TargetCreate());
+        //StartCoroutine(EnumFunc_TargetCreate());
     }
 
 
@@ -75,12 +75,12 @@ public class GameUI : MonoBehaviour
 
     public void DestroyAllTarget()
     {
-        CTarget[] listTarget = m_TargetParent.GetComponentsInChildren<CTarget>();
-        for( int i = 0; i < listTarget.Length; i++ )
-        {
-            if(listTarget[i].gameObject != null)
-                Destroy(listTarget[i].gameObject, 0.1f);
-        }
+        //CTarget[] listTarget = m_TargetParent.GetComponentsInChildren<CTarget>();
+        //for( int i = 0; i < listTarget.Length; i++ )
+        //{
+        //    if(listTarget[i].gameObject != null)
+        //        Destroy(listTarget[i].gameObject, 0.1f);
+        //}
     }
 
 
