@@ -7,8 +7,8 @@ public class GameUI : MonoBehaviour
     public CGun m_Gun = null;
     public Transform m_trOffstPos = null;
 
-    public GameObject m_prefabTarget;
-    public Transform m_TargetParent;
+    public GameObject m_prefabEnemy;
+    public Transform m_EnemyParent;
 
     public float m_FireDelay = 2.0f;
     [HideInInspector] public bool m_bMoveStart = false;
@@ -43,9 +43,9 @@ public class GameUI : MonoBehaviour
 
     public void CreateTarget()
     {
-        GameObject go = Instantiate(m_prefabTarget, m_TargetParent);
+        GameObject go = Instantiate(m_prefabEnemy, m_EnemyParent);
         go.transform.position = m_trOffstPos.position;
-        go.transform.localScale = m_prefabTarget.transform.localScale;
+        go.transform.localScale = m_prefabEnemy.transform.localScale;
 
         CTarget kTarget = go.GetComponent<CTarget>();
         kTarget.Initialize(true);
