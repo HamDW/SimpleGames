@@ -4,29 +4,38 @@ using UnityEngine;
 
 public class GameUI : MonoBehaviour
 {
-    public CGun m_Gun = null;
-    public Transform m_trOffstPos = null;
+    public const float DFIRE_DELAY_MAX = 0.4f;
+
+    //public CGun m_Gun = null;
+    public Player m_Player = null;
+    public Transform [] m_SpwanList = null;     // 적 생성 지점 리스트
 
     public GameObject m_prefabEnemy;
     public Transform m_EnemyParent;
 
-    public float m_FireDelay = 2.0f;
+    public CZombiData m_ZombiData = null;
+
+    public float m_CreateDelay = 2.0f;
     [HideInInspector] public bool m_bMoveStart = false;
-    
+
+    float m_fFireDelay = 0;
+    bool m_bFire = false;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        //m_ZombiData = ScriptableObject.CreateInstance<CZombiData>();
+        Debug.Log("ZombiData Count = " +m_ZombiData.m_listData.Count);
     }
 
     public void Initialize()
     {
-        m_Gun.Initialize();
+        m_Player.Initialize();
 
         // 타겟 생성 시작
         m_bMoveStart = true;
-        //StartCoroutine(EnumFunc_TargetCreate());
+        StartCoroutine(EnumFunc_TargetCreate());
     }
 
 
@@ -36,19 +45,35 @@ public class GameUI : MonoBehaviour
         {
             CreateTarget();
             
-            yield return new WaitForSeconds(m_FireDelay); //0.3f
+            yield return new WaitForSeconds(m_CreateDelay); //0.3f
         }
+    }
+
+
+    private CZombiData.SDataInfo MakeRandomZombiData()
+    {
+        int nRes = Random.Range(0, 3);
+
+        return m_ZombiData.GetData(nRes);
+    }
+
+    private Vector3 MakeRandomPosition()
+    {
+        int nRes = Random.Range(0, m_SpwanList.Length);
+        return m_SpwanList[nRes].position;
     }
 
 
     public void CreateTarget()
     {
         GameObject go = Instantiate(m_prefabEnemy, m_EnemyParent);
-        go.transform.position = m_trOffstPos.position;
+        go.transform.position = MakeRandomPosition();
         go.transform.localScale = m_prefabEnemy.transform.localScale;
 
-        CTarget kTarget = go.GetComponent<CTarget>();
-        kTarget.Initialize(true);
+        CZombiData.SDataInfo kInfo = MakeRandomZombiData();
+
+        Enemy kTarget = go.GetComponent<Enemy>();
+        kTarget.Initialize(kInfo, m_Player.transform);
     }
 
 
@@ -58,23 +83,44 @@ public class GameUI : MonoBehaviour
         if (!GameMgr.Inst.gameScene.m_BattleFSM.IsGameState())
             return;
 
-        if( Input.GetMouseButtonDown(0))
+        m_fFireDelay += Time.deltaTime;
+        if( m_fFireDelay >= DFIRE_DELAY_MAX )
         {
-            m_Gun.Fire();
+            m_bFire = true;
         }
+
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (m_bFire)
+            {
+                // 0.3초 간격으로 사격을 하자
+                m_Player.Fire();
+                m_bFire = false;
+                m_fFireDelay = 0;
+            }
+        }
+
     }
 
-  
+
     public void SetGameResultEnter()
     {
         m_bMoveStart = false;
         DestroyAllTarget();
-        m_Gun.SetIsCanFire(false);
+        m_Player.SetIsCanFire(false);
     }
 
 
     public void DestroyAllTarget()
     {
+        Enemy[] listEnemy = m_EnemyParent.GetComponentsInChildren<Enemy>();
+        for( int i = 0; i < listEnemy.Length; i++)
+        {
+            if (listEnemy[i].gameObject != null)
+                Destroy(listEnemy[i].gameObject, 0.1f);
+        }
+
         //CTarget[] listTarget = m_TargetParent.GetComponentsInChildren<CTarget>();
         //for( int i = 0; i < listTarget.Length; i++ )
         //{

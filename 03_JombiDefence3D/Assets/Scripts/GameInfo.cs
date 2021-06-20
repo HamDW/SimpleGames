@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class GameInfo
 {
-    public  float m_fMaxTime = 30.0f;       // 게임 전체 시간
+    public const int DATTACK_VAULE = 100;    // 총알 공격력
+                                             // 
+    public  float m_fMaxTime = 180.0f;       // 게임 전체 시간
     private float m_fCurTime = 0;           // 게임 경과 시간
     public int m_nScore = 0;                // 점수
+
 
     public void Initialize()
     {
