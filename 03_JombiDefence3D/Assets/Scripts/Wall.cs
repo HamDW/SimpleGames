@@ -21,6 +21,14 @@ public class Wall : MonoBehaviour
         if (collision.gameObject.tag == "Bullet")
         {
             Debug.Log("Hit Bullet..... Wall!!");
+            Destroy(collision.gameObject, 0.01f);
         }
+
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Debug.Log("Enemy..... Wall!!");
+            Destroy(collision.gameObject, 0.01f);
+        }
+
     }
 }

@@ -10,10 +10,12 @@ public class GameUI : MonoBehaviour
     public Player m_Player = null;
     public Transform [] m_SpwanList = null;     // 利 积己 瘤痢 府胶飘
 
-    public GameObject m_prefabEnemy;
-    public Transform m_EnemyParent;
+    public GameObject m_prefabEnemy = null;
+    public Transform m_EnemyParent = null;
 
     public CZombiData m_ZombiData = null;
+
+    //[SerializeField] SpriteRenderer m_sprMouseCursor = null;
 
     public float m_CreateDelay = 2.0f;
     [HideInInspector] public bool m_bMoveStart = false;
@@ -27,12 +29,15 @@ public class GameUI : MonoBehaviour
     {
         //m_ZombiData = ScriptableObject.CreateInstance<CZombiData>();
         Debug.Log("ZombiData Count = " +m_ZombiData.m_listData.Count);
+
+        //m_sprMouseCursor.gameObject.SetActive(false);
     }
 
     public void Initialize()
     {
         m_Player.Initialize();
 
+        //m_sprMouseCursor.gameObject.SetActive(true);
         // 鸥百 积己 矫累
         m_bMoveStart = true;
         StartCoroutine(EnumFunc_TargetCreate());
@@ -83,12 +88,16 @@ public class GameUI : MonoBehaviour
         if (!GameMgr.Inst.gameScene.m_BattleFSM.IsGameState())
             return;
 
+        Update_Fire();
+    }
+
+    private void Update_Fire()
+    {
         m_fFireDelay += Time.deltaTime;
-        if( m_fFireDelay >= DFIRE_DELAY_MAX )
+        if (m_fFireDelay >= DFIRE_DELAY_MAX)
         {
             m_bFire = true;
         }
-
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -100,7 +109,6 @@ public class GameUI : MonoBehaviour
                 m_fFireDelay = 0;
             }
         }
-
     }
 
 
@@ -109,6 +117,7 @@ public class GameUI : MonoBehaviour
         m_bMoveStart = false;
         DestroyAllTarget();
         m_Player.SetIsCanFire(false);
+        //m_sprMouseCursor.gameObject.SetActive(false);
     }
 
 
@@ -128,6 +137,24 @@ public class GameUI : MonoBehaviour
         //        Destroy(listTarget[i].gameObject, 0.1f);
         //}
     }
+
+
+
+
+    //void Update_MouseCursor()
+    //{
+    //    Vector3 vPos = Input.mousePosition;
+    //    Camera kCamera = Camera.main;
+    //    vPos.z = -kCamera.transform.position.z;
+
+    //    Vector3 vWorld = kCamera.ScreenToWorldPoint(vPos);
+    //    m_sprMouseCursor.transform.position = vWorld;
+    //}
+
+
+
+
+
 
 
     //public void RayCastTestForMouseCursor()

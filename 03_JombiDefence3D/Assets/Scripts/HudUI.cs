@@ -12,10 +12,15 @@ public class HudUI : MonoBehaviour
     [SerializeField] Text m_txtCount = null;
     [SerializeField] Text m_txtScore = null;
 
+    [SerializeField] Image m_MouseCursor = null;
+    [SerializeField] Canvas m_RootCanvas;
+
+
     void Start()
     {
         ShowTopUI(false);
         OpenMenuDlg();
+        m_MouseCursor.gameObject.SetActive(false);
     }
 
     // √ ±‚»≠
@@ -24,7 +29,7 @@ public class HudUI : MonoBehaviour
         
         ShowTopUI(true);
         PrintDurationTime();
-
+        m_MouseCursor.gameObject.SetActive(true);
     }
 
     public void OpenResultUI()
@@ -62,6 +67,7 @@ public class HudUI : MonoBehaviour
     void Update()
     {
         PrintDurationTime();
+        Update_MouseCursor();
     }
 
 
@@ -109,8 +115,32 @@ public class HudUI : MonoBehaviour
 
     public void SetGameResultEnter()
     {
+        m_MouseCursor.gameObject.SetActive(false);
         ShowTopUI(false);
         OpenResultUI();
+    }
+
+
+    void Update_MouseCursor()
+    {
+        Vector3 vPos = Input.mousePosition;
+        Camera kCamera = m_RootCanvas.worldCamera;
+
+        Vector3 vWorld;
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(
+                  m_RootCanvas.transform as RectTransform, vPos, kCamera, out vWorld);
+
+        m_MouseCursor.transform.position = vWorld;
+    }
+
+    void Update_MouseCursor2()
+    {
+        Vector3 vPos = Input.mousePosition;
+        Camera kCamera = Camera.main;
+        vPos.z = -kCamera.transform.position.z;
+
+        Vector3 vWorld = kCamera.ScreenToWorldPoint(vPos);
+        m_MouseCursor.transform.position = vWorld;
     }
 
 }

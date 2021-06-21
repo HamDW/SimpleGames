@@ -8,7 +8,8 @@ public class CGun : MonoBehaviour
     [SerializeField] Transform m_BulletParent = null;       // 총알들 부모 노드
     public Transform m_BulletStartPos = null;               // 총알 발사 시작점
     [SerializeField] private Animator m_gunAnimator = null;
-    
+    [SerializeField] Transform m_EffectParent = null;
+
     private bool m_IsCanFire = false;                       // 사격 가능한가?
     private AudioSource m_Audio = null;
 
@@ -48,19 +49,8 @@ public class CGun : MonoBehaviour
 
     public bool Fire()
     {
-        //m_gunAnimator.SetTrigger("Fire");
+        m_gunAnimator.SetTrigger("Fire");
         return RayCastTest();
-    }
-
-
-    public void CreateBullet(Vector3 vTargetPos)
-    {
-        GameObject go = Instantiate(m_PrefabBullet, m_BulletParent);
-        go.transform.localScale = m_PrefabBullet.transform.localScale;
-        go.transform.position = m_BulletStartPos.position;
-
-        Bullet kBullet = go.GetComponent<Bullet>();
-        kBullet.Initialize(vTargetPos, 1.0f);
     }
 
     public bool RayCastTest()
@@ -68,7 +58,12 @@ public class CGun : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, 1000))
         {
-            CreateBullet(hit.point);
+            CreateDamageEffect(hit.point);
+            if( hit.collider.gameObject.tag == "Enemy")
+            {
+                Enemy kEnemy = hit.collider.gameObject.GetComponent<Enemy>();
+                kEnemy.AddDamage(GameInfo.DATTACK_VAULE);
+            }
 
             m_Audio.Play();
 
@@ -89,7 +84,8 @@ public class CGun : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, layerMask))
         {
-            CreateBullet(hit.point);
+            CreateDamageEffect(hit.point);
+            //CreateBullet(hit.point);
 
             m_Audio.PlayOneShot(m_Audio.clip);
 
@@ -100,6 +96,19 @@ public class CGun : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+
+
+    public void CreateDamageEffect(Vector3 vPos )
+    {
+       GameObject goPrefab = Resources.Load<GameObject>("Prefabs/FX/FxDamage");
+
+        GameObject go = Instantiate(goPrefab, m_EffectParent);
+        vPos.z -= 0.3f;        // 약간 앞쪽에 출력한다.
+        go.transform.position = vPos;
+        go.transform.localScale = goPrefab.transform.localScale;
+
     }
 
 

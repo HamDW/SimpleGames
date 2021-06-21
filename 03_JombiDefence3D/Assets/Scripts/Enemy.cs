@@ -6,9 +6,13 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    
     public Animator m_Animator = null;
+    public FXParticle m_FxDamage = null;
+    
     private Transform m_Target = null;
     private Vector3 m_vDir;
+    
 
     private string m_Name;
     private int m_HP = 0;
@@ -23,6 +27,8 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject, 30.0f);
         
     }
+
+
 
     public void Initialize(CZombiData.SDataInfo kData, Transform target)
     {
@@ -43,6 +49,24 @@ public class Enemy : MonoBehaviour
     {
         if (m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie_Walk"))
             transform.Translate(m_vDir * m_Speed * Time.deltaTime * 1, Space.World);
+    }
+
+    public void AddDamage(int nDamage)
+    {
+        m_HP -= nDamage;
+
+        if (m_HP <= 0)
+        {
+            GameMgr.Inst.m_GameInfo.AddScore(1);
+
+            m_Animator.SetTrigger("Dead");
+            Destroy(gameObject, 2.0f);
+        }
+        else
+        {
+            if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie_Damage"))
+                m_Animator.SetTrigger("Damage");
+        }
     }
 
 
@@ -103,12 +127,12 @@ public class Enemy : MonoBehaviour
     {
         if (other.gameObject.tag.Equals("Bullet"))
         {
-            //m_Animator.ResetTrigger(1);
             
-
             Debug.Log("Collision  : attack ani start");
 
             Destroy(other.gameObject, 0.01f);
+            m_FxDamage.Play();
+
 
             m_HP -= GameInfo.DATTACK_VAULE;
             if (m_HP <= 0)
