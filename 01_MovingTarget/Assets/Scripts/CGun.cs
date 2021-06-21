@@ -9,10 +9,16 @@ public class CGun : MonoBehaviour
     public Transform m_BulletStartPos = null;               // 총알 발사 시작점
     [SerializeField] private Animator m_gunAnimator = null;
     
+
     private bool m_IsCanFire = false;                       // 사격 가능한가?
     private AudioSource m_Audio = null;
 
+    private Vector3 m_OffsetPos;                        // 총의 초기 위치
 
+    void Awake()
+    {
+        m_OffsetPos = transform.position;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +36,11 @@ public class CGun : MonoBehaviour
     public void Initialize()
     {
         m_IsCanFire = true;
+    }
+
+    public void ResetPosition()
+    {
+        transform.position = m_OffsetPos;
     }
 
     public void SetIsCanFire(bool bState)

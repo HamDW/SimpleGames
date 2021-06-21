@@ -6,10 +6,10 @@ public class CTarget : MonoBehaviour
 {
     [SerializeField] GameObject m_Body = null;
     public float m_Speed = 1.0f;
-    public FXParticle m_Explsion = null;
+    public FXParticle m_Explosion = null;                    // 폭파 이펙트
 
     [HideInInspector] public bool m_IsDead = false;           // 충돌 2번 되는것 방지
-    [HideInInspector] public bool m_bMove = false;
+    [HideInInspector] public bool m_bMove = false;            // 이동 시작  
 
     // Start is called before the first frame update
     void Start()
@@ -37,14 +37,15 @@ public class CTarget : MonoBehaviour
         {
             if (!m_IsDead)
             {
-                m_Explsion.Play();
+                m_Explosion.Play();
                 GameMgr.Inst.AddScore(1);
                 GameMgr.Inst.gameScene.m_HudUI.PrintScore();
 
                 m_IsDead = true;
                 m_Body.SetActive(false);
-                Destroy(collision.gameObject, 0.001f);
-                Destroy(gameObject, 0.4f);
+                
+                Destroy(collision.gameObject, 0.01f);
+                Destroy(gameObject, 0.4f);                  // 폭파이펙트 처리를 위해 조금 늦게 파괴함
             }
         }
     }

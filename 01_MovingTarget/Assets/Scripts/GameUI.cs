@@ -12,7 +12,11 @@ public class GameUI : MonoBehaviour
 
     public float m_CreateDelay = 2.0f;
     [HideInInspector] public bool m_bMoveStart = false;
-    
+
+
+    [SerializeField] SpriteRenderer m_sprMouseCursor = null;
+    float m_fFireDelay = 0;
+    bool m_bFire = false;
 
     // Start is called before the first frame update
     void Start()
@@ -58,9 +62,24 @@ public class GameUI : MonoBehaviour
         if (!GameMgr.Inst.gameScene.m_BattleFSM.IsGameState())
             return;
 
-        if( Input.GetMouseButtonDown(0))
+        //Update_MouseCursor();
+
+        m_fFireDelay += Time.deltaTime;
+
+        if ( Input.GetMouseButtonDown(0))
         {
-            m_Gun.Fire();
+            if (m_fFireDelay > 0.2f)
+            {
+                m_bFire = true;
+            }
+
+            if (m_bFire)
+            {
+                m_Gun.Fire();
+
+                m_fFireDelay = 0;
+                m_bFire = false;
+            }
         }
     }
 
@@ -70,6 +89,7 @@ public class GameUI : MonoBehaviour
         m_bMoveStart = false;
         DestroyAllTarget();
         m_Gun.SetIsCanFire(false);
+        m_Gun.ResetPosition();
     }
 
 
@@ -81,6 +101,16 @@ public class GameUI : MonoBehaviour
             if(listTarget[i].gameObject != null)
                 Destroy(listTarget[i].gameObject, 0.1f);
         }
+    }
+
+    void Update_MouseCursor()
+    {
+        Vector3 vPos = Input.mousePosition;
+        Camera kCamera = Camera.main;
+        vPos.z = -kCamera.transform.position.z;
+
+        Vector3 vWorld = kCamera.ScreenToWorldPoint(vPos);
+        m_sprMouseCursor.transform.position = vWorld;
     }
 
 
