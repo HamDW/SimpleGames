@@ -48,7 +48,12 @@ public class Enemy : MonoBehaviour
     private void Move()
     {
         if (m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie_Walk"))
-            transform.Translate(m_vDir * m_Speed * Time.deltaTime * 1, Space.World);
+            transform.Translate(m_vDir * m_Speed * Time.deltaTime, Space.World);
+
+        if (m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie_Damage"))
+            transform.Translate(-m_vDir * m_Speed * Time.deltaTime * 3, Space.World);       // 총 맞으면 뒤로 물러나기
+
+
     }
 
     public void AddDamage(int nDamage)
@@ -64,7 +69,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie_Damage"))
+            //if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie_Damage"))
                 m_Animator.SetTrigger("Damage");
         }
     }
