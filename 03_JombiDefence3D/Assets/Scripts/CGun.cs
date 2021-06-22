@@ -56,8 +56,9 @@ public class CGun : MonoBehaviour
     public bool RayCastTest()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 1000))
-        {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if( Physics.Raycast(ray, out hit, 1000))
+        { 
             CreateDamageEffect(hit.point);
             if( hit.collider.gameObject.tag == "Enemy")
             {
@@ -69,35 +70,14 @@ public class CGun : MonoBehaviour
 
             //Debug.LogFormat("hit point = ({0}, {1}, {2})", hit.point.x, hit.point.y, hit.point.z);
             //Vector3 vDir = hit.point - m_BulletStartPos.position;
+          
             //Debug.DrawRay(m_BulletStartPos.position, vDir, Color.red, 3.0f);
             return true;
         }
         return false;
     }
 
-    public bool RayCastTest2()
-    {
-        int layer1 = LayerMask.NameToLayer("Background");
-        int layer2 = LayerMask.NameToLayer("Target");
-        int layerMask = (1 << layer1) | (1 << layer2);
-
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, layerMask))
-        {
-            CreateDamageEffect(hit.point);
-            //CreateBullet(hit.point);
-
-            m_Audio.PlayOneShot(m_Audio.clip);
-
-            Debug.LogFormat("hit point = ({0}, {1}, {2})", hit.point.x, hit.point.y, hit.point.z);
-            Vector3 vDir = hit.point - m_BulletStartPos.position;
-            Debug.DrawRay(m_BulletStartPos.position, vDir, Color.red, 1.0f);
-
-            return true;
-        }
-        return false;
-    }
-
+    
 
 
     public void CreateDamageEffect(Vector3 vPos )
@@ -112,7 +92,29 @@ public class CGun : MonoBehaviour
     }
 
 
- 
+    //public bool RayCastTest2()
+    //{
+    //    int layer1 = LayerMask.NameToLayer("Background");
+    //    int layer2 = LayerMask.NameToLayer("Target");
+    //    int layerMask = (1 << layer1) | (1 << layer2);
+
+    //    RaycastHit hit;
+    //    if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, layerMask))
+    //    {
+    //        CreateDamageEffect(hit.point);
+    //        //CreateBullet(hit.point);
+
+    //        m_Audio.PlayOneShot(m_Audio.clip);
+
+    //        Debug.LogFormat("hit point = ({0}, {1}, {2})", hit.point.x, hit.point.y, hit.point.z);
+    //        Vector3 vDir = hit.point - m_BulletStartPos.position;
+    //        Debug.DrawRay(m_BulletStartPos.position, vDir, Color.red, 1.0f);
+
+    //        return true;
+    //    }
+    //    return false;
+    //}
+
 
     //public Vector3 ScreenToWorldPos()
     //{

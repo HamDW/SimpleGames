@@ -6,12 +6,17 @@ public class GameScene : MonoBehaviour
 {
     public GameUI m_GameUI;
     public HudUI m_HudUI;
+    [SerializeField] bool m_isFPSMode = false;
+    
     [HideInInspector] public BattleFSM m_BattleFSM = new BattleFSM();
+
 
     private void Awake()
     {
         GameMgr.Inst.Initialize();
-        GameMgr.Inst.gameScene = this;   
+        GameMgr.Inst.gameScene = this;
+
+        GameMgr.Inst.m_GameInfo.IsFPS = m_isFPSMode;
     }
 
     // Start is called before the first frame update
@@ -35,7 +40,6 @@ public class GameScene : MonoBehaviour
 
     void Call_ResultEnter()
     {
-        Cursor.visible = true;
         m_GameUI.SetGameResultEnter();
         m_HudUI.SetGameResultEnter();
     }
@@ -45,7 +49,6 @@ public class GameScene : MonoBehaviour
         GameMgr.Inst.InitGameStart();
         m_GameUI.Initialize();
         m_HudUI.Initialize();
-        Cursor.visible = false;
     }
 
     public void ResetGame()

@@ -35,9 +35,13 @@ public class GameUI : MonoBehaviour
 
     public void Initialize()
     {
+        Cursor.visible = false;
+        if (GameMgr.Inst.m_GameInfo.IsFPS){
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
         m_Player.Initialize();
 
-        //m_sprMouseCursor.gameObject.SetActive(true);
         // 타겟 생성 시작
         m_bMoveStart = true;
         StartCoroutine(EnumFunc_TargetCreate());
@@ -117,6 +121,11 @@ public class GameUI : MonoBehaviour
         m_bMoveStart = false;
         DestroyAllTarget();
         m_Player.SetIsCanFire(false);
+
+        Cursor.visible = true;
+        if (GameMgr.Inst.m_GameInfo.IsFPS){
+            Cursor.lockState = CursorLockMode.None;
+        }
         //m_sprMouseCursor.gameObject.SetActive(false);
     }
 
