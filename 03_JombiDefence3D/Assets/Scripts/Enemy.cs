@@ -74,11 +74,34 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void CheckPlayer()
+    {
+        int nLayer = LayerMask.NameToLayer("Player");
+        int nLayerMask = 1 << nLayer;
+        Collider[] cols = Physics.OverlapSphere(transform.position, 1.5f, nLayerMask);
+        
+        if( cols.Length > 0 )
+        {
+            if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie_Attack"))
+            {
+                m_Animator.SetTrigger("Attack");
+                m_Animator.SetFloat("MoveSpeed", 0.1f);
+                Debug.Log("Enemy Attack....");
+            }
+        }
+        else
+        {
+            if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie_Walk"))
+                m_Animator.SetFloat("MoveSpeed", 0.2f);
+        }
+    }
 
     // Update is called once per frame
     void Update()
     {
         Move();
+        CheckPlayer();
+
 
 #if DUSE_TEST
 
