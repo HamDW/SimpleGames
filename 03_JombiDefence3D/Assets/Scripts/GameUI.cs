@@ -41,7 +41,7 @@ public class GameUI : MonoBehaviour
 
         // 타겟 생성 시작
         m_bMoveStart = true;
-       // StartCoroutine(EnumFunc_EnemyCreate());
+        StartCoroutine(EnumFunc_EnemyCreate());
     }
 
 

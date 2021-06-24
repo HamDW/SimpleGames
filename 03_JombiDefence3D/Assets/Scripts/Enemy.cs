@@ -94,7 +94,7 @@ public class Enemy : MonoBehaviour
         
         if( cols.Length > 0 )
         {
-            if (!IsAni_Attack() || !IsAni_Damage())
+            if (!IsAni_Attack() )
             {
                 m_Animator.SetTrigger("Attack");
                 Debug.Log("Enemy Attack....");
@@ -103,7 +103,10 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            m_Animator.SetFloat("MoveSpeed", 0.2f);
+            if (IsAni_Attack() )
+                m_Animator.SetFloat("MoveSpeed", 0.01f);
+            else
+                m_Animator.SetFloat("MoveSpeed", 0.2f);
         }
     }
 
