@@ -10,7 +10,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: MoveSpeed
-    m_EventTreshold: 0.2
+    m_EventTreshold: 0.1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6133886119688830072}
   m_Solo: 0
@@ -265,7 +265,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: MoveSpeed
-    m_EventTreshold: 0.2
+    m_EventTreshold: 0.1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6133886119688830072}
   m_Solo: 0
@@ -374,16 +374,16 @@ AnimatorStateMachine:
     m_Position: {x: 310, y: 1090, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102081598220014424}
-    m_Position: {x: 360, y: 800, z: 0}
+    m_Position: {x: 400, y: 820, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6133886119688830072}
-    m_Position: {x: -100, y: 990, z: 0}
+    m_Position: {x: -130, y: 1030, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7203066422050295034}
-    m_Position: {x: -130, y: 820, z: 0}
+    m_Position: {x: -100, y: 800, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4682243666540806201}
-    m_Position: {x: 120, y: 700, z: 0}
+    m_Position: {x: 150, y: 700, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 1168615880040775933}
@@ -434,10 +434,10 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.4115387
-  m_TransitionOffset: 0
-  m_ExitTime: 5.2870613e-10
-  m_HasExitTime: 1
+  m_TransitionDuration: 0.06962369
+  m_TransitionOffset: 0.1923272
+  m_ExitTime: 0.04579219
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -477,7 +477,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: MoveSpeed
-    m_EventTreshold: 0.2
+    m_EventTreshold: 0.1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7203066422050295034}
   m_Solo: 0
@@ -574,7 +574,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 3
+    m_ConditionEvent: MoveSpeed
+    m_EventTreshold: 0.1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7203066422050295034}
   m_Solo: 0

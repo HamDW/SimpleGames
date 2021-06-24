@@ -10,13 +10,15 @@ public class Enemy : MonoBehaviour
     public Animator m_Animator = null;
     public FXParticle m_FxDamage = null;
     
-    private Transform m_Target = null;
+    public Transform m_Target = null;
     private Vector3 m_vDir;
     
 
     private string m_Name;
-    private int m_HP = 0;
+    private int m_HP = 1;
     private float m_Speed = 1;
+
+    private bool m_bDead = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,13 +26,19 @@ public class Enemy : MonoBehaviour
         if( m_Animator == null)
             m_Animator = GetComponent<Animator>();
 
-        Destroy(gameObject, 30.0f);
-        
+        Destroy(gameObject, 60.0f);
+
+        if (m_Target != null)
+        {
+            m_vDir = m_Target.transform.position - transform.position;
+            m_vDir.Normalize();
+            transform.LookAt(m_Target);
+        }
     }
 
 
 
-    public void Initialize(CZombiData.SDataInfo kData, Transform target)
+    public void Initialize(CEnemyData.SDataInfo kData, Transform target)
     {
         m_Target = target;
         m_HP = kData.m_Hp;
@@ -47,30 +55,34 @@ public class Enemy : MonoBehaviour
 
     private void Move()
     {
-        if (m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie_Walk"))
+        if (IsAni_Walk())
             transform.Translate(m_vDir * m_Speed * Time.deltaTime, Space.World);
 
-        if (m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie_Damage"))
+        if (IsAni_Damage())
             transform.Translate(-m_vDir * m_Speed * Time.deltaTime * 3, Space.World);       // 총 맞으면 뒤로 물러나기
-
 
     }
 
     public void AddDamage(int nDamage)
     {
-        m_HP -= nDamage;
+        if (m_bDead)
+            return;
+
+       // m_HP -= nDamage;
 
         if (m_HP <= 0)
         {
+            m_bDead = true;
             GameMgr.Inst.m_GameInfo.AddScore(1);
 
             m_Animator.SetTrigger("Dead");
-            Destroy(gameObject, 2.0f);
+            GameMgr.Inst.gameScene.m_HudUI.PrintScore();
+
+            Destroy(gameObject, 1.0f);
         }
         else
         {
-            //if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie_Damage"))
-                m_Animator.SetTrigger("Damage");
+             m_Animator.SetTrigger("Damage");
         }
     }
 
@@ -78,30 +90,48 @@ public class Enemy : MonoBehaviour
     {
         int nLayer = LayerMask.NameToLayer("Player");
         int nLayerMask = 1 << nLayer;
-        Collider[] cols = Physics.OverlapSphere(transform.position, 1.5f, nLayerMask);
+        Collider[] cols = Physics.OverlapSphere(transform.position, 1.1f, nLayerMask);
         
         if( cols.Length > 0 )
         {
-            if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie_Attack"))
+            if (!IsAni_Attack() || !IsAni_Damage())
             {
                 m_Animator.SetTrigger("Attack");
-                m_Animator.SetFloat("MoveSpeed", 0.1f);
+                //m_Animator.SetFloat("MoveSpeed", 0.01f);
                 Debug.Log("Enemy Attack....");
             }
+            m_Animator.SetFloat("MoveSpeed", 0.01f);
         }
         else
         {
-            if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie_Walk"))
+            if( IsAni_Attack() )
+                m_Animator.SetFloat("MoveSpeed", 0.01f);
+            else
                 m_Animator.SetFloat("MoveSpeed", 0.2f);
         }
     }
 
+    public bool IsAni_Attack()
+    {
+        return m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie_Attack");
+    }
+
+    public bool IsAni_Walk()
+    {
+        return m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie_Walk");
+    }
+
+    public bool IsAni_Damage()
+    {
+        return m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie_Damage");
+    }
+    
+    
     // Update is called once per frame
     void Update()
     {
-        Move();
         CheckPlayer();
-
+        Move();
 
 #if DUSE_TEST
 

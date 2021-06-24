@@ -4,9 +4,9 @@ using UnityEngine;
 using System;
 
 
-[CreateAssetMenu(fileName = "ZombiData", menuName = "ScriptableObject/ZombiData", order = int.MaxValue)]
+[CreateAssetMenu(fileName = "EnemyData", menuName = "ScriptableObject/EnemyData", order = int.MaxValue)]
 
-public class CZombiData : ScriptableObject
+public class CEnemyData : ScriptableObject
 {
     [Serializable]
     public class SDataInfo

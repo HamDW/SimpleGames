@@ -13,7 +13,7 @@ public class GameUI : MonoBehaviour
     public GameObject m_prefabEnemy = null;
     public Transform m_EnemyParent = null;
 
-    public CZombiData m_ZombiData = null;
+    public CEnemyData m_ZombiData = null;
 
     //[SerializeField] SpriteRenderer m_sprMouseCursor = null;
 
@@ -27,8 +27,7 @@ public class GameUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //m_ZombiData = ScriptableObject.CreateInstance<CZombiData>();
-        Debug.Log("ZombiData Count = " +m_ZombiData.m_listData.Count);
+        Debug.Log("ZombiData Count = " + m_ZombiData.m_listData.Count);
 
         //m_sprMouseCursor.gameObject.SetActive(false);
     }
@@ -44,22 +43,22 @@ public class GameUI : MonoBehaviour
 
         // 타겟 생성 시작
         m_bMoveStart = true;
-        StartCoroutine(EnumFunc_TargetCreate());
+        //StartCoroutine(EnumFunc_EnemyCreate());
     }
 
 
-    IEnumerator EnumFunc_TargetCreate()
+    IEnumerator EnumFunc_EnemyCreate()
     {
         while( m_bMoveStart )
         {
-            CreateTarget();
+            CreateEnemy();
             
             yield return new WaitForSeconds(m_CreateDelay); //0.3f
         }
     }
 
 
-    private CZombiData.SDataInfo MakeRandomZombiData()
+    private CEnemyData.SDataInfo MakeRandomZombiData()
     {
         int nRes = Random.Range(0, 3);
 
@@ -73,13 +72,13 @@ public class GameUI : MonoBehaviour
     }
 
 
-    public void CreateTarget()
+    public void CreateEnemy()
     {
         GameObject go = Instantiate(m_prefabEnemy, m_EnemyParent);
         go.transform.position = MakeRandomPosition();
         go.transform.localScale = m_prefabEnemy.transform.localScale;
 
-        CZombiData.SDataInfo kInfo = MakeRandomZombiData();
+        CEnemyData.SDataInfo kInfo = MakeRandomZombiData();
 
         Enemy kTarget = go.GetComponent<Enemy>();
         kTarget.Initialize(kInfo, m_Player.transform);
