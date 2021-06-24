@@ -19,6 +19,11 @@ public class GameMgr
     public GameScene gameScene { get; set; }
     public GameInfo m_GameInfo = new GameInfo();
 
+    public bool IsFPS
+    {
+        get { return m_GameInfo.m_IsFPS;  }
+        set { m_GameInfo.m_IsFPS = value; }
+    }
 
     public void Initialize()
     {

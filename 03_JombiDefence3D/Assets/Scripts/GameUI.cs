@@ -28,14 +28,12 @@ public class GameUI : MonoBehaviour
     void Start()
     {
         Debug.Log("ZombiData Count = " + m_ZombiData.m_listData.Count);
-
-        //m_sprMouseCursor.gameObject.SetActive(false);
     }
 
     public void Initialize()
     {
         Cursor.visible = false;
-        if (GameMgr.Inst.m_GameInfo.IsFPS){
+        if (GameMgr.Inst.IsFPS){
             Cursor.lockState = CursorLockMode.Locked;
         }
 
@@ -43,7 +41,7 @@ public class GameUI : MonoBehaviour
 
         // 타겟 생성 시작
         m_bMoveStart = true;
-        //StartCoroutine(EnumFunc_EnemyCreate());
+       // StartCoroutine(EnumFunc_EnemyCreate());
     }
 
 
@@ -122,9 +120,11 @@ public class GameUI : MonoBehaviour
         m_Player.SetIsCanFire(false);
 
         Cursor.visible = true;
-        if (GameMgr.Inst.m_GameInfo.IsFPS){
+        if (GameMgr.Inst.IsFPS){
             Cursor.lockState = CursorLockMode.None;
         }
+
+        GameMgr.Inst.IsFPS = false;
         //m_sprMouseCursor.gameObject.SetActive(false);
     }
 

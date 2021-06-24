@@ -10,7 +10,7 @@ public class GameInfo
     private float m_fCurTime = 0;           // 게임 경과 시간
     public int m_nScore = 0;                // 점수
 
-    public bool IsFPS = false;
+    public bool m_IsFPS = false;
 
 
     public void Initialize()

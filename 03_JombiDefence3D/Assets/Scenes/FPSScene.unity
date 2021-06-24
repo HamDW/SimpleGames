@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.562856, g: 0.45823592, b: 0.0000042454826, a: 1}
+  m_IndirectSpecularColor: {r: 0.56311494, g: 0.45829225, b: 0.00000515019, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1323,6 +1323,7 @@ MonoBehaviour:
   m_GameUI: {fileID: 743265815}
   m_HudUI: {fileID: 1803168724}
   m_isFPSMode: 1
+  m_kFpsCamera: {fileID: 963194229}
 --- !u!82 &757662482
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3183,7 +3184,6 @@ MonoBehaviour:
   m_txtScore: {fileID: 1874725944}
   m_MouseCursor: {fileID: 1623718150}
   m_RootCanvas: {fileID: 304310837}
-  m_isFPS: 1
 --- !u!1 &1821022052
 GameObject:
   m_ObjectHideFlags: 0
@@ -3447,7 +3447,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Hit 5
+  m_Text: 'Score : 0'
 --- !u!222 &1874725945
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4103,7 +4103,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9146891016236872819, guid: 8d39746af3333354283664c8700b3349, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9148639659628168587, guid: 8d39746af3333354283664c8700b3349, type: 3}
       propertyPath: m_Target

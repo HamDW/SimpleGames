@@ -10,19 +10,21 @@ public class GameScene : MonoBehaviour
     
     [HideInInspector] public BattleFSM m_BattleFSM = new BattleFSM();
 
+    public FPSCamera m_kFpsCamera = null;
+
 
     private void Awake()
     {
         GameMgr.Inst.Initialize();
         GameMgr.Inst.gameScene = this;
-
-        GameMgr.Inst.m_GameInfo.IsFPS = m_isFPSMode;
     }
 
     // Start is called before the first frame update
     void Start()
     {
         m_BattleFSM.Initialize(Call_ReadyEnter, Call_WaveEnter, Call_GameEnter, Call_ResultEnter);
+
+        m_kFpsCamera.m_IsFPS = GameMgr.Inst.IsFPS;
     }
 
 
@@ -40,12 +42,18 @@ public class GameScene : MonoBehaviour
 
     void Call_ResultEnter()
     {
+        GameMgr.Inst.IsFPS = false;
+        m_kFpsCamera.m_IsFPS = false;
+
         m_GameUI.SetGameResultEnter();
         m_HudUI.SetGameResultEnter();
     }
 
     public void GameStart()
     {
+        GameMgr.Inst.IsFPS = m_isFPSMode;
+        m_kFpsCamera.m_IsFPS = m_isFPSMode;
+
         GameMgr.Inst.InitGameStart();
         m_GameUI.Initialize();
         m_HudUI.Initialize();

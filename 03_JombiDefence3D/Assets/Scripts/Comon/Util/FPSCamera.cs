@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MouseLook : MonoBehaviour
+public class FPSCamera : MonoBehaviour
 {
     public float m_Speed = 1.0f;
     public float m_ClampAngle = 80.0f;

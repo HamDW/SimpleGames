@@ -15,7 +15,7 @@ public class HudUI : MonoBehaviour
     [SerializeField] Image m_MouseCursor = null;
     [SerializeField] Canvas m_RootCanvas;
 
-    public bool m_isFPS = false;
+    private bool m_isFPS = false;
 
     void Start()
     {
@@ -68,9 +68,11 @@ public class HudUI : MonoBehaviour
     void Update()
     {
         PrintDurationTime();
-        //PrintScore();
 
-        if (!m_isFPS)
+        if (!GameMgr.Inst.gameScene.m_BattleFSM.IsGameState())
+            return;
+
+        if (!GameMgr.Inst.IsFPS )
         {
             Update_MouseCursor();
         }
