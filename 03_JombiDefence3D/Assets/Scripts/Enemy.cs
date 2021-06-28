@@ -103,7 +103,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            if (IsAni_Attack() )
+            if (IsAni_Attack())
                 m_Animator.SetFloat("MoveSpeed", 0.01f);
             else
                 m_Animator.SetFloat("MoveSpeed", 0.2f);
