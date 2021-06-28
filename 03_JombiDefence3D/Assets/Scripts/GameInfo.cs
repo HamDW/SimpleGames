@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameInfo
 {
     public const int DATTACK_VAULE = 100;    // 총알 공격력
+    public const int DENEMY_ATTACK = 100;    // 적 공격력
     public const int DMAX_HP = 1000;         // player 최대 HP
                                              // 
     public  float m_fMaxTime = 60.0f;       // 게임 전체 시간
@@ -43,11 +44,16 @@ public class GameInfo
     }
 
 
-    public void AddDamage( int nDamage)
+    public bool AddDamage( int nDamage)
     {
         m_HP -= nDamage;
         if (m_HP <= 0)
+        {
             m_HP = 0;
+            return false;
+        }
+
+        return true;
 
     }
 

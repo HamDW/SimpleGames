@@ -97,6 +97,8 @@ public class Enemy : MonoBehaviour
             if (!IsAni_Attack() )
             {
                 m_Animator.SetTrigger("Attack");
+                GameMgr.Inst.m_GameInfo.AddDamage(10);
+
                 Debug.Log("Enemy Attack....");
             }
             m_Animator.SetFloat("MoveSpeed", 0.01f);
