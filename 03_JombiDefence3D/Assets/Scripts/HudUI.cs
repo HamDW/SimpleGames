@@ -15,6 +15,9 @@ public class HudUI : MonoBehaviour
     [SerializeField] Image m_MouseCursor = null;
     [SerializeField] Canvas m_RootCanvas;
 
+    [SerializeField] HPBarUI m_HpBarUI = null;
+
+
     private bool m_isFPS = false;
 
     void Start()
@@ -31,6 +34,7 @@ public class HudUI : MonoBehaviour
         ShowTopUI(true);
         PrintDurationTime();
         m_MouseCursor.gameObject.SetActive(true);
+        m_HpBarUI.Initialize();
     }
 
     public void OpenResultUI()
@@ -125,6 +129,7 @@ public class HudUI : MonoBehaviour
     {
         m_MouseCursor.gameObject.SetActive(false);
         ShowTopUI(false);
+        m_HpBarUI.SetIsActionBar(false);
         OpenResultUI();
     }
 

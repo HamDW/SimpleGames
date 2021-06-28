@@ -20,6 +20,8 @@ public class Enemy : MonoBehaviour
 
     private bool m_bDead = false;
 
+    private bool m_bAttack = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -94,12 +96,29 @@ public class Enemy : MonoBehaviour
         
         if( cols.Length > 0 )
         {
-            if (!IsAni_Attack() )
+            if ( IsAni_Idle() )
             {
-                m_Animator.SetTrigger("Attack");
-                GameMgr.Inst.m_GameInfo.AddDamage(10);
+                if( !m_bAttack )
+                {
+                    m_bAttack = true;
+                    m_Animator.SetTrigger("Attack");
 
-                Debug.Log("Enemy Attack....");
+                    if( GameMgr.Inst.m_GameInfo.AddDamage(GameInfo.DENEMY_ATTACK) ==false )
+                    {
+                        GameMgr.Inst.gameScene.m_BattleFSM.SetResultState();
+                        return;
+                    }
+
+
+
+
+                    // 공격 애니메이션 길이 구하기
+                    AnimatorClipInfo[] kClipInfos = m_Animator.GetCurrentAnimatorClipInfo(0);
+                    float fLength = kClipInfos[0].clip.length;
+
+                    Invoke("Callback_Attack", fLength);
+                    Debug.Log("Enemy Attack....");
+                }
             }
             m_Animator.SetFloat("MoveSpeed", 0.01f);
         }
@@ -110,6 +129,11 @@ public class Enemy : MonoBehaviour
             else
                 m_Animator.SetFloat("MoveSpeed", 0.2f);
         }
+    }
+
+    void Callback_Attack()
+    {
+        m_bAttack = false;
     }
 
     public bool IsAni_Attack()
@@ -126,8 +150,13 @@ public class Enemy : MonoBehaviour
     {
         return m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie_Damage");
     }
-    
-    
+
+    public bool IsAni_Idle()
+    {
+        return m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie_Idle");
+    }
+
+
     // Update is called once per frame
     void Update()
     {
