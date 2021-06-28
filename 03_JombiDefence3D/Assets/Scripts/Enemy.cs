@@ -68,7 +68,7 @@ public class Enemy : MonoBehaviour
         if (m_bDead)
             return;
 
-       // m_HP -= nDamage;
+        m_HP -= nDamage;
 
         if (m_HP <= 0)
         {
@@ -78,7 +78,7 @@ public class Enemy : MonoBehaviour
             m_Animator.SetTrigger("Dead");
             GameMgr.Inst.gameScene.m_HudUI.PrintScore();
 
-            Destroy(gameObject, 1.0f);
+            Destroy(gameObject, 2.0f);
         }
         else
         {

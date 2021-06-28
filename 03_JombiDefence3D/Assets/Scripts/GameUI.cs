@@ -119,10 +119,10 @@ public class GameUI : MonoBehaviour
         DestroyAllTarget();
         m_Player.SetIsCanFire(false);
 
-        Cursor.visible = true;
-        if (GameMgr.Inst.IsFPS){
-            Cursor.lockState = CursorLockMode.None;
-        }
+
+        FPSCamera.UnlockedMouse();
+        //Cursor.visible = true;
+        //Cursor.lockState = CursorLockMode.None;
 
         GameMgr.Inst.IsFPS = false;
         //m_sprMouseCursor.gameObject.SetActive(false);
