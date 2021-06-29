@@ -25,8 +25,8 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: ac2eeb98f1b423941b373f537bc56e18, type: 2}
+  m_SubtractiveShadowColor: {r: 0.27702028, g: 0.40954733, b: 0.745283, a: 1}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 82b660520bdecce4daf45d270ec93fe4, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.56311494, g: 0.45829225, b: 0.00000515019, a: 1}
+  m_IndirectSpecularColor: {r: 0.13513187, g: 0.14836529, b: 0.1614475, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -488,6 +488,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level Art
       objectReference: {fileID: 0}
+    - target: {fileID: 1378188243159790, guid: 49b04053ea2dc49ae8eae12418134ef1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1666721553581836, guid: 49b04053ea2dc49ae8eae12418134ef1, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -667,6 +671,26 @@ PrefabInstance:
     - target: {fileID: 65906661337132058, guid: 49b04053ea2dc49ae8eae12418134ef1, type: 3}
       propertyPath: m_Center.y
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 108662626697605468, guid: 49b04053ea2dc49ae8eae12418134ef1, type: 3}
+      propertyPath: m_Color.b
+      value: 0.010964744
+      objectReference: {fileID: 0}
+    - target: {fileID: 108662626697605468, guid: 49b04053ea2dc49ae8eae12418134ef1, type: 3}
+      propertyPath: m_Color.g
+      value: 0.252109
+      objectReference: {fileID: 0}
+    - target: {fileID: 108662626697605468, guid: 49b04053ea2dc49ae8eae12418134ef1, type: 3}
+      propertyPath: m_Color.r
+      value: 0.26415092
+      objectReference: {fileID: 0}
+    - target: {fileID: 108662626697605468, guid: 49b04053ea2dc49ae8eae12418134ef1, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 108662626697605468, guid: 49b04053ea2dc49ae8eae12418134ef1, type: 3}
+      propertyPath: m_Shadows.m_Strength
+      value: 0.79
       objectReference: {fileID: 0}
     - target: {fileID: 199227838317612392, guid: 49b04053ea2dc49ae8eae12418134ef1, type: 3}
       propertyPath: m_Materials.Array.size
