@@ -24,7 +24,8 @@ public class GameScene : MonoBehaviour
     {
         m_BattleFSM.Initialize(Call_ReadyEnter, Call_WaveEnter, Call_GameEnter, Call_ResultEnter);
 
-        m_kFpsCamera.m_IsFPS = GameMgr.Inst.IsFPS;
+        if( m_kFpsCamera != null)
+            m_kFpsCamera.m_IsFPS = GameMgr.Inst.IsFPS;
     }
 
 
