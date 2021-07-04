@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SkyEarlyDusk
+  m_Name: SkyMorning2
   m_Shader: {fileID: 104, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -20,19 +20,19 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BackTex:
-        m_Texture: {fileID: 2800000, guid: 675b7eb08655ed44d87fc86d2d5cb154, type: 3}
+        m_Texture: {fileID: 2800000, guid: fcc2b2ac825c29e40a96b9fe97d58996, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DownTex:
-        m_Texture: {fileID: 2800000, guid: 3b39cd44ada2c7e4582ffc0d367906f6, type: 3}
+        m_Texture: {fileID: 2800000, guid: 69e70dad389c0c24e92a7e6723d01693, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FrontTex:
-        m_Texture: {fileID: 2800000, guid: 03d88a9245522804b93d275a99ae6f6a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3797d43a379e9fd418e966e5cd686e02, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _LeftTex:
-        m_Texture: {fileID: 2800000, guid: a8bbea5efbf70dc45a0dd6325430062f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 50b15f1019ba9484e8c2896aca1c3a37, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -40,15 +40,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RightTex:
-        m_Texture: {fileID: 2800000, guid: 8733101b6a14ca740b346255c2d3f21f, type: 3}
+        m_Texture: {fileID: 2800000, guid: fd6e6bf5771e4834ba4404d8ca0014e9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _UpTex:
-        m_Texture: {fileID: 2800000, guid: 9d95a22c05b30774fa8556489f0c5561, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4f60de17fc5e7a245a20331038a2b9ce, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Exposure: 1
+    - _Exposure: 0.35
     - _Rotation: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
