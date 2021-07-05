@@ -80,6 +80,7 @@ public class HudUI : MonoBehaviour
         {
             Update_MouseCursor();
         }
+        // 1인칭인 경우는 커서가 가운데 고정
     }
 
 

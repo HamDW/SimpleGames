@@ -80,11 +80,15 @@ public class TestEnemy : MonoBehaviour
             m_Animator.SetTrigger("Dead");
             //GameMgr.Inst.gameScene.m_HudUI.PrintScore();
 
-            Destroy(gameObject, 2.0f);
+            Debug.Log("4.Dead.....!");
+
+
+            Destroy(gameObject, 2.5f);
         }
         else
         {
             m_Animator.SetTrigger("Damage");
+            Debug.Log("3.Damgae.....!");
         }
     }
 
@@ -100,21 +104,22 @@ public class TestEnemy : MonoBehaviour
             {
                 if (!m_bAttack)
                 {
-                    m_bAttack = true;
-                    m_Animator.SetTrigger("Attack");
-
                     if (GameMgr.Inst.m_GameInfo.AddDamage(GameInfo.DENEMY_ATTACK) == false)
                     {
                         GameMgr.Inst.gameScene.m_BattleFSM.SetResultState();
                         return;
                     }
 
+                    m_bAttack = true;
+                    m_Animator.SetTrigger("Attack");
+                    Debug.Log("5.Attack.....!");
+
+
                     // 공격 애니메이션 길이 구하기
                     AnimatorClipInfo[] kClipInfos = m_Animator.GetCurrentAnimatorClipInfo(0);
                     float fLength = kClipInfos[0].clip.length;
 
                     Invoke("Callback_Attack", fLength);
-                    Debug.Log("Enemy Attack....");
                 }
             }
             m_Animator.SetFloat("MoveSpeed", 0.01f);
@@ -157,8 +162,8 @@ public class TestEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckPlayer();
-        Move();
+        //CheckPlayer();
+        //Move();
 
 #if DUSE_TEST
 
