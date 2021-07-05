@@ -153,6 +153,7 @@ public class TestEnemy : MonoBehaviour
         return m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie_Damage");
     }
 
+
     public bool IsAni_Idle()
     {
         return m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie_Idle");
