@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class TestEnemy : MonoBehaviour
 {
-
     public Animator m_Animator = null;
     public FXParticle m_FxDamage = null;
 
@@ -14,12 +13,11 @@ public class TestEnemy : MonoBehaviour
     private Vector3 m_vDir;
 
 
-    private string m_Name;
-    private int m_HP = 1;
-    private float m_Speed = 1;
+    private string m_Name = "Zombi_01";
+    public int m_HP = 1000;
+    public float m_Speed = 0.5f;
 
     private bool m_bDead = false;
-
     private bool m_bAttack = false;
 
     // Start is called before the first frame update
@@ -28,7 +26,7 @@ public class TestEnemy : MonoBehaviour
         if (m_Animator == null)
             m_Animator = GetComponent<Animator>();
 
-        Destroy(gameObject, 60.0f);
+       // Destroy(gameObject, 60.0f);
 
         if (m_Target != null)
         {
@@ -36,20 +34,22 @@ public class TestEnemy : MonoBehaviour
             m_vDir.Normalize();
             transform.LookAt(m_Target);
         }
+
+        Initialize();
     }
 
 
 
-    public void Initialize(CEnemyData.SDataInfo kData, Transform target)
+    public void Initialize()
     {
-        m_Target = target;
-        m_HP = kData.m_Hp;
-        m_Speed = kData.m_Speed;
-        m_Name = kData.m_Name;
+        //m_Target = target;
+        //m_HP = 1000;
+        //m_Speed = 0.5f;
+        //m_Name = "Zombi";
 
         m_vDir = m_Target.transform.position - transform.position;
         m_vDir.Normalize();
-        transform.LookAt(target);
+        transform.LookAt(m_Target);
 
         m_Animator.SetFloat("MoveSpeed", 0.2f);
     }
@@ -78,7 +78,7 @@ public class TestEnemy : MonoBehaviour
             GameMgr.Inst.m_GameInfo.AddScore(1);
 
             m_Animator.SetTrigger("Dead");
-            GameMgr.Inst.gameScene.m_HudUI.PrintScore();
+            //GameMgr.Inst.gameScene.m_HudUI.PrintScore();
 
             Destroy(gameObject, 2.0f);
         }
@@ -177,7 +177,12 @@ public class TestEnemy : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            m_Animator.SetTrigger("Reset");
+            m_Animator.SetTrigger("Damage");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            m_Animator.SetTrigger("Dead");
         }
 
 #endif
