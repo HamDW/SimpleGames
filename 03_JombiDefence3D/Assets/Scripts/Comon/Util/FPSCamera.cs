@@ -8,19 +8,19 @@ public class FPSCamera : MonoBehaviour
     public float m_ClampAngle = 80.0f;
     public bool m_IsFPS = true;
 
-    private float rotY = 0.0f; // rotation around the up/y axis
-    private float rotX = 0.0f; // rotation around the right/x axis
+    private float m_rotY = 0.0f; // rotation around the up/y axis
+    private float m_rotX = 0.0f; // rotation around the right/x axis
 
     void Start()
     {
         Vector3 rot = transform.localRotation.eulerAngles;
-        rotY = rot.y;
-        rotX = rot.x;
+        m_rotY = rot.y;
+        m_rotX = rot.x;
     }
 
     public static void LockedMouse()
     {
-        Cursor.visible = false;
+
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -37,12 +37,12 @@ public class FPSCamera : MonoBehaviour
             float mouseX = Input.GetAxis("Mouse X");
             float mouseY = -Input.GetAxis("Mouse Y");
 
-            rotY += mouseX * m_Speed * Time.deltaTime * 200;
-            rotX += mouseY * m_Speed * Time.deltaTime * 200;
+            m_rotY += mouseX * m_Speed * Time.deltaTime * 200;
+            m_rotX += mouseY * m_Speed * Time.deltaTime * 200;
 
-            rotX = Mathf.Clamp(rotX, -m_ClampAngle, m_ClampAngle);
+            m_rotX = Mathf.Clamp(m_rotX, -m_ClampAngle, m_ClampAngle);
 
-            Quaternion localRotation = Quaternion.Euler(rotX, rotY, 0.0f);
+            Quaternion localRotation = Quaternion.Euler(m_rotX, m_rotY, 0.0f);
             transform.rotation = localRotation;
         }
     }
