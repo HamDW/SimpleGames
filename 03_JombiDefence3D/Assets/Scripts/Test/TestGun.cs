@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class TestGun : MonoBehaviour
 {
-    [SerializeField] GameObject m_PrefabBullet = null;      // ÃÑ¾Ë ÇÁ¸®ÆÕ
-    [SerializeField] Transform m_BulletParent = null;       // ÃÑ¾Ëµé ºÎ¸ð ³ëµå
-    public Transform m_BulletStartPos = null;               // ÃÑ¾Ë ¹ß»ç ½ÃÀÛÁ¡
+    //[SerializeField] GameObject m_PrefabBullet = null;      // ÃÑ¾Ë ÇÁ¸®ÆÕ
+    //[SerializeField] Transform m_BulletParent = null;       // ÃÑ¾Ëµé ºÎ¸ð ³ëµå
+    //public Transform m_BulletStartPos = null;               // ÃÑ¾Ë ¹ß»ç ½ÃÀÛÁ¡
     [SerializeField] private Animator m_gunAnimator = null;
     [SerializeField] Transform m_EffectParent = null;
 
@@ -55,7 +55,9 @@ public class TestGun : MonoBehaviour
 
     public bool Fire()
     {
-        m_gunAnimator.SetTrigger("Fire");
+        if( m_gunAnimator != null)
+            m_gunAnimator.SetTrigger("Fire");
+        
         return RayCastTest();
     }
 
