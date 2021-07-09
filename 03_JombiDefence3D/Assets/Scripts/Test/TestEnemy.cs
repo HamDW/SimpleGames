@@ -159,7 +159,7 @@ public class TestEnemy : MonoBehaviour
         return m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie_Idle");
     }
 
-
+    
     // Update is called once per frame
     void Update()
     {

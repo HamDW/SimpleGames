@@ -2,15 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FPSCamera : MonoBehaviour
+public class TestFPSCamera : FPSCamera
 {
-    public float m_Speed = 1.0f;
-    public float m_ClampAngle = 80.0f;
-    public bool m_IsFPS = true;
-
-    protected float m_rotY = 0.0f; // rotation around the up/y axis
-    protected float m_rotX = 0.0f; // rotation around the right/x axis
-
+    // Start is called before the first frame update
     void Start()
     {
         Vector3 rot = transform.localRotation.eulerAngles;
@@ -18,18 +12,7 @@ public class FPSCamera : MonoBehaviour
         m_rotX = rot.x;
     }
 
-    public static void LockedMouse()
-    {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-    }
-
-    public static void UnlockedMouse()
-    {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-    }
-
+    // Update is called once per frame
     void Update()
     {
         if (m_IsFPS)
@@ -46,5 +29,5 @@ public class FPSCamera : MonoBehaviour
             transform.rotation = localRotation;
         }
     }
-
 }
+
