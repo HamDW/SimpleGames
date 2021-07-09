@@ -17,16 +17,16 @@ public class TestFPSCamera : FPSCamera
     {
         if (m_IsFPS)
         {
-            float mouseX = Input.GetAxis("Mouse X");
+            //float mouseX = Input.GetAxis("Mouse X");
             float mouseY = -Input.GetAxis("Mouse Y");
-
-            m_rotY += mouseX * m_Speed * Time.deltaTime * 200;
+            m_rotY = 0;
+           // m_rotY += mouseX * m_Speed * Time.deltaTime * 200;
             m_rotX += mouseY * m_Speed * Time.deltaTime * 200;
 
             m_rotX = Mathf.Clamp(m_rotX, -m_ClampAngle, m_ClampAngle);
 
             Quaternion localRotation = Quaternion.Euler(m_rotX, m_rotY, 0.0f);
-            transform.rotation = localRotation;
+            transform.localRotation = localRotation;
         }
     }
 }
