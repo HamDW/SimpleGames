@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: ac2eeb98f1b423941b373f537bc56e18, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: e523c896238589445ae28370258d26c6, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.562856, g: 0.45823592, b: 0.0000042454826, a: 1}
+  m_IndirectSpecularColor: {r: 0.42979622, g: 0.5002178, b: 0.5687746, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1634,9 +1634,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62baaf19ae86f284f9e4b4348d0e7d4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PrefabBullet: {fileID: 551116367903406926, guid: d5592521fc4bd97499f854255366b578, type: 3}
-  m_BulletParent: {fileID: 188574411}
-  m_BulletStartPos: {fileID: 2026474506}
   m_gunAnimator: {fileID: 7931135122006179997}
   m_EffectParent: {fileID: 0}
   m_IsCanFire: 1
@@ -3348,6 +3345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MouseCursor: {fileID: 1623718150}
   m_RootCanvas: {fileID: 304310837}
+  m_IsFPS: 0
 --- !u!1 &1821022052
 GameObject:
   m_ObjectHideFlags: 0
@@ -5575,6 +5573,10 @@ PrefabInstance:
     - target: {fileID: 1201482546287378371, guid: 14f2e95c651e9ae43933f39138d72556, type: 3}
       propertyPath: m_Name
       value: WFX_Explosion Simple
+      objectReference: {fileID: 0}
+    - target: {fileID: 1201482546287378371, guid: 14f2e95c651e9ae43933f39138d72556, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9046734787180857495, guid: 14f2e95c651e9ae43933f39138d72556, type: 3}
       propertyPath: m_RootOrder

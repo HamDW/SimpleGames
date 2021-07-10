@@ -89,28 +89,28 @@ public class GameUI : MonoBehaviour
         if (!GameMgr.Inst.gameScene.m_BattleFSM.IsGameState())
             return;
 
-        Update_Fire();
+        //Update_Fire();
     }
 
-    private void Update_Fire()
-    {
-        m_fFireDelay += Time.deltaTime;
-        if (m_fFireDelay >= DFIRE_DELAY_MAX)
-        {
-            m_bFire = true;
-        }
+    //private void Update_Fire()
+    //{
+    //    m_fFireDelay += Time.deltaTime;
+    //    if (m_fFireDelay >= DFIRE_DELAY_MAX)
+    //    {
+    //        m_bFire = true;
+    //    }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (m_bFire)
-            {
-                // 0.3초 간격으로 사격을 하자
-                m_Player.Fire();
-                m_bFire = false;
-                m_fFireDelay = 0;
-            }
-        }
-    }
+    //    if (Input.GetMouseButtonDown(0))
+    //    {
+    //        if (m_bFire)
+    //        {
+    //            // 0.3초 간격으로 사격을 하자
+    //            m_Player.Fire();
+    //            m_bFire = false;
+    //            m_fFireDelay = 0;
+    //        }
+    //    }
+    //}
 
 
     public void SetGameResultEnter()
@@ -121,11 +121,8 @@ public class GameUI : MonoBehaviour
 
 
         FPSCamera.UnlockedMouse();
-        //Cursor.visible = true;
-        //Cursor.lockState = CursorLockMode.None;
 
         GameMgr.Inst.IsFPS = false;
-        //m_sprMouseCursor.gameObject.SetActive(false);
     }
 
 
@@ -137,49 +134,6 @@ public class GameUI : MonoBehaviour
             if (listEnemy[i].gameObject != null)
                 Destroy(listEnemy[i].gameObject, 0.1f);
         }
-
-        //CTarget[] listTarget = m_TargetParent.GetComponentsInChildren<CTarget>();
-        //for( int i = 0; i < listTarget.Length; i++ )
-        //{
-        //    if(listTarget[i].gameObject != null)
-        //        Destroy(listTarget[i].gameObject, 0.1f);
-        //}
     }
-
-
-
-
-    //void Update_MouseCursor()
-    //{
-    //    Vector3 vPos = Input.mousePosition;
-    //    Camera kCamera = Camera.main;
-    //    vPos.z = -kCamera.transform.position.z;
-
-    //    Vector3 vWorld = kCamera.ScreenToWorldPoint(vPos);
-    //    m_sprMouseCursor.transform.position = vWorld;
-    //}
-
-
-
-
-
-
-
-    //public void RayCastTestForMouseCursor()
-    //{
-    //    RaycastHit hit;
-    //    Vector3 vPos = Input.mousePosition;
-    //    //vPos.z = -Camera.main.transform.position.z;
-    //    Ray ray = Camera.main.ScreenPointToRay(vPos);
-    //    if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-    //    {
-    //        m_Gun.Fire();
-
-    //        Debug.LogFormat("hit point = ({0}, {1}, {2})", hit.point.x, hit.point.y, hit.point.z);
-    //        Vector3 vDir = hit.point - m_Gun.m_BulletStartPos.position;
-    //        Debug.DrawRay(m_Gun.m_BulletStartPos.position, vDir, Color.red, 3.0f);
-    //    }
-    //}
-
 
 }

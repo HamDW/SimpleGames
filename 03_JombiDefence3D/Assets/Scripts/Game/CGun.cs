@@ -4,42 +4,39 @@ using UnityEngine;
 
 public class CGun : MonoBehaviour
 {
-    [SerializeField] GameObject m_PrefabBullet = null;      // 총알 프리팹
-    [SerializeField] Transform m_BulletParent = null;       // 총알들 부모 노드
-    public Transform m_BulletStartPos = null;               // 총알 발사 시작점
     [SerializeField] private Animator m_gunAnimator = null;
     [SerializeField] Transform m_EffectParent = null;
 
-    public bool m_IsCanFire = false;                       // 사격 가능한가?
-    private AudioSource m_Audio = null;
+    public bool m_isGameStart = false;                // 총 회전 여부
+    protected AudioSource m_Audio = null;
+
 
     private void Awake()
     {
-        m_IsCanFire = false;
+        m_isGameStart = false;
     }
 
     // Start is called before the first frame update
     void Start()
     {
         m_Audio = GetComponent<AudioSource>();
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(m_IsCanFire)
+        if(m_isGameStart)
             RotationGun();
     }
 
     public void Initialize()
     {
-        m_IsCanFire = true;
+        m_isGameStart = true;
     }
 
     public void SetIsCanFire(bool bState)
     {
-        m_IsCanFire = bState;
+        m_isGameStart = bState;
     }
 
     public void RotationGun()
@@ -57,13 +54,13 @@ public class CGun : MonoBehaviour
         return RayCastTest();
     }
 
-    public bool RayCastTest()
+    public virtual bool RayCastTest()
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if( Physics.Raycast(ray, out hit, 1000))
         { 
-            CreateDamageEffect(hit.point);
+            CreateDamageEffect(ray.direction, hit.point);
             if( hit.collider.gameObject.tag == "Enemy")
             {
                 Enemy kEnemy = hit.collider.gameObject.GetComponent<Enemy>();
@@ -74,7 +71,6 @@ public class CGun : MonoBehaviour
 
             //Debug.LogFormat("hit point = ({0}, {1}, {2})", hit.point.x, hit.point.y, hit.point.z);
             //Vector3 vDir = hit.point - m_BulletStartPos.position;
-          
             //Debug.DrawRay(m_BulletStartPos.position, vDir, Color.red, 3.0f);
             return true;
         }
@@ -83,13 +79,12 @@ public class CGun : MonoBehaviour
 
     
 
-
-    public void CreateDamageEffect(Vector3 vPos )
+    public void CreateDamageEffect(Vector3 rayDir, Vector3 vPos )
     {
        GameObject goPrefab = Resources.Load<GameObject>("Prefabs/FX/FxDamage");
 
         GameObject go = Instantiate(goPrefab, m_EffectParent);
-        vPos.z -= 0.3f;        // 약간 앞쪽에 출력한다.
+        vPos -= (rayDir * 0.1f);        // 약간 앞쪽에 출력한다.
         go.transform.position = vPos;
         go.transform.localScale = goPrefab.transform.localScale;
 
@@ -118,7 +113,6 @@ public class CGun : MonoBehaviour
     //    }
     //    return false;
     //}
-
 
     //public Vector3 ScreenToWorldPos()
     //{

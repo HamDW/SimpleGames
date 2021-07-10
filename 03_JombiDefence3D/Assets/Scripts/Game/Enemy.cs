@@ -92,7 +92,7 @@ public class Enemy : MonoBehaviour
     {
         int nLayer = LayerMask.NameToLayer("Player");
         int nLayerMask = 1 << nLayer;
-        Collider[] cols = Physics.OverlapSphere(transform.position, 1.1f, nLayerMask);
+        Collider[] cols = Physics.OverlapSphere(transform.position, 1.4f, nLayerMask);
         
         if( cols.Length > 0 )
         {
@@ -108,9 +108,6 @@ public class Enemy : MonoBehaviour
                         GameMgr.Inst.gameScene.m_BattleFSM.SetResultState();
                         return;
                     }
-
-
-
 
                     // 공격 애니메이션 길이 구하기
                     AnimatorClipInfo[] kClipInfos = m_Animator.GetCurrentAnimatorClipInfo(0);
@@ -211,32 +208,32 @@ public class Enemy : MonoBehaviour
             
     //}
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag.Equals("Bullet"))
-        {
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.tag.Equals("Bullet"))
+    //    {
             
-            Debug.Log("Collision  : attack ani start");
+    //        Debug.Log("Collision  : attack ani start");
 
-            Destroy(other.gameObject, 0.01f);
-            m_FxDamage.Play();
+    //        Destroy(other.gameObject, 0.01f);
+    //        m_FxDamage.Play();
 
 
-            m_HP -= GameInfo.DATTACK_VAULE;
-            if (m_HP <= 0)
-            {
-                GameMgr.Inst.m_GameInfo.AddScore(1);
+    //        m_HP -= GameInfo.DATTACK_VAULE;
+    //        if (m_HP <= 0)
+    //        {
+    //            GameMgr.Inst.m_GameInfo.AddScore(1);
 
-                m_Animator.SetTrigger("Dead");
-                Destroy(gameObject, 2.0f);
-            }
-            else
-            {
-                if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie_Damage"))
-                    m_Animator.SetTrigger("Damage");
-            }
+    //            m_Animator.SetTrigger("Dead");
+    //            Destroy(gameObject, 2.0f);
+    //        }
+    //        else
+    //        {
+    //            if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie_Damage"))
+    //                m_Animator.SetTrigger("Damage");
+    //        }
 
-        }
-    }
+    //    }
+    //}
 
 }

@@ -6,15 +6,11 @@ using UnityEngine;
 
 public class TestGun : MonoBehaviour
 {
-    //[SerializeField] GameObject m_PrefabBullet = null;      // 총알 프리팹
-    //[SerializeField] Transform m_BulletParent = null;       // 총알들 부모 노드
-    //public Transform m_BulletStartPos = null;               // 총알 발사 시작점
     [SerializeField] private Animator m_gunAnimator = null;
     [SerializeField] Transform m_EffectParent = null;
 
     public bool m_IsCanFire = false;                       // 사격 가능한가?
     private AudioSource m_Audio = null;
-
     private void Awake()
     {
         m_IsCanFire = false;
@@ -24,7 +20,6 @@ public class TestGun : MonoBehaviour
     void Start()
     {
         m_Audio = GetComponent<AudioSource>();
-
     }
 
     // Update is called once per frame
@@ -65,9 +60,10 @@ public class TestGun : MonoBehaviour
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        
         if (Physics.Raycast(ray, out hit, 1000))
         {
-            CreateDamageEffect(hit.point);
+            CreateDamageEffect( ray.direction, hit.point);
             if (hit.collider.gameObject.tag == "Enemy")
             {
                 TestEnemy kEnemy = hit.collider.gameObject.GetComponent<TestEnemy>();
@@ -88,12 +84,12 @@ public class TestGun : MonoBehaviour
 
 
 
-    public void CreateDamageEffect(Vector3 vPos)
+    public void CreateDamageEffect( Vector3 rayDir, Vector3 vPos)
     {
         GameObject goPrefab = Resources.Load<GameObject>("Prefabs/FX/FxDamage");
 
         GameObject go = Instantiate(goPrefab, m_EffectParent);
-        vPos.z -= 0.3f;        // 약간 앞쪽에 출력한다.
+        vPos -= (rayDir * 0.1f);  // 약간 앞쪽에 출력한다. ( 정규화된 방향벡터를 빼면 바로 앞쪽에 위치한다.)
         go.transform.position = vPos;
         go.transform.localScale = goPrefab.transform.localScale;
 

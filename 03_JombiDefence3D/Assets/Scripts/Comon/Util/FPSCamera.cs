@@ -43,7 +43,7 @@ public class FPSCamera : MonoBehaviour
             m_rotX = Mathf.Clamp(m_rotX, -m_ClampAngle, m_ClampAngle);
 
             Quaternion localRotation = Quaternion.Euler(m_rotX, m_rotY, 0.0f);
-            transform.rotation = localRotation;
+            transform.localRotation = localRotation;
         }
     }
 

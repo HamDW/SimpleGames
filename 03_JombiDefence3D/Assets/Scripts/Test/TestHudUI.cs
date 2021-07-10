@@ -7,7 +7,7 @@ public class TestHudUI : MonoBehaviour
 {
     [SerializeField] Image m_MouseCursor = null;
     [SerializeField] Canvas m_RootCanvas;
-
+    public bool m_IsFPS = false;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +22,8 @@ public class TestHudUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Update_MouseCursor();
+        if(!m_IsFPS)
+            Update_MouseCursor();
     }
 
     void Update_MouseCursor()

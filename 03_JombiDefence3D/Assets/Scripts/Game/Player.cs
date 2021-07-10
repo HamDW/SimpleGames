@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    //public const float DFIRE_DELAY_MAX = 0.3f;
+    public float DFIRE_DELAY_MAX = 0.3f;
     public CGun m_Gun = null;
 
-    //float m_fFireDelay = 0;
-    //bool m_bFire = false;
+    float m_fFireDelay = 0;
+    bool m_bFire = false;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +23,8 @@ public class Player : MonoBehaviour
 
     public void Fire()
     {
-        m_Gun.Fire();
+        if( m_Gun.m_isGameStart )
+            m_Gun.Fire();
     }
 
 
@@ -33,28 +34,28 @@ public class Player : MonoBehaviour
     }
 
     //// Update is called once per frame
-    //void Update()
-    //{
-    //    Update_Fire();
-    //}
+    void Update()
+    {
+        Update_Fire();
+    }
 
-    //private void Update_Fire()
-    //{
-    //    m_fFireDelay += Time.deltaTime;
-    //    if (m_fFireDelay >= DFIRE_DELAY_MAX)
-    //    {
-    //        m_bFire = true;
-    //    }
+    private void Update_Fire()
+    {
+        m_fFireDelay += Time.deltaTime;
+        if (m_fFireDelay >= DFIRE_DELAY_MAX)
+        {
+            m_bFire = true;
+        }
 
-    //    if (Input.GetMouseButtonDown(0))
-    //    {
-    //        if (m_bFire)
-    //        {
-    //            // 0.3초 간격으로 사격을 하자
-    //            this.Fire();
-    //            m_bFire = false;
-    //            m_fFireDelay = 0;
-    //        }
-    //    }
-    //}
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (m_bFire)
+            {
+                // 0.3초 간격으로 사격을 하자
+                this.Fire();
+                m_bFire = false;
+                m_fFireDelay = 0;
+            }
+        }
+    }
 }
