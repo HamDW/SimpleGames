@@ -60,7 +60,7 @@ public class TestPlayer : MonoBehaviour
     public bool Fire()
     {
         m_gunAnimator.SetTrigger("Fire");
-        return RayCastTest();
+        return RayCastTest2();
     }
 
 
@@ -104,6 +104,43 @@ public class TestPlayer : MonoBehaviour
     }
 
     public bool RayCastTest2()
+    {
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity);
+        {
+            for(int i = 0; i < hits.Length; i++ )
+            {
+                //CreateBullet(hit.point);
+                if (hits[i].collider.tag == "Target")
+                {
+                    TestTarget kTarget = hits[i].collider.GetComponent<TestTarget>();
+                    
+                    kTarget.CheckHit(hits[i].point);
+
+
+                    //Destroy(hit.collider.gameObject, 0.02f);
+                }
+
+            }
+
+
+
+
+            m_Audio.Play();
+
+            //Debug.LogFormat("hit point = ({0}, {1}, {2})", hit.point.x, hit.point.y, hit.point.z);
+            //Vector3 vDir = hit.point - m_BulletStartPos.position;
+            //Debug.DrawRay(m_BulletStartPos.position, vDir, Color.red, 3.0f);
+            return true;
+        }
+        return false;
+    }
+
+
+
+    public bool RayCastTest3()
     {
         int layer1 = LayerMask.NameToLayer("Background");
         int layer2 = LayerMask.NameToLayer("Target");
