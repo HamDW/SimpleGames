@@ -33,6 +33,8 @@ public class TestTarget2 : MonoBehaviour
             transform.Translate(Vector3.left * m_Speed * Time.deltaTime * 10);
     }
 
+
+    // 직접 컬라이어의 크기를 이용해 영역 체크후 처리
     public void CheckHit(Vector3 vHitWorldPos)
     {
         Debug.Log("Hit");
@@ -40,8 +42,8 @@ public class TestTarget2 : MonoBehaviour
         Vector3 vPos = transform.InverseTransformPoint(vHitWorldPos);  // 타겟 기준 로컬 좌표로 변환
 
         Vector3 vSize = kCollider.size;
-        if (vPos.x > -vSize.x * 0.25f && vPos.x < vSize.x * 0.25f
-            && vPos.y > -vSize.y * 0.25f && vPos.y < vSize.y * 0.25f)
+        Rect rc = new Rect(Vector2.zero, vSize * 0.5f);
+        if( rc.Contains( vPos ))
         {
             Debug.Log("100 점");
             m_HudUI.PrintScore2(100);
@@ -51,6 +53,18 @@ public class TestTarget2 : MonoBehaviour
             Debug.Log("50 점");
             m_HudUI.PrintScore2(50);
         }
+
+        //if (vPos.x > -vSize.x * 0.25f && vPos.x < vSize.x * 0.25f
+        //    && vPos.y > -vSize.y * 0.25f && vPos.y < vSize.y * 0.25f)
+        //{
+        //    Debug.Log("100 점");
+        //    m_HudUI.PrintScore2(100);
+        //}
+        //else
+        //{
+        //    Debug.Log("50 점");
+        //    m_HudUI.PrintScore2(50);
+        //}
     }
 
     public void CheckHit2(Vector3 vHitWorldPos, int nScore)

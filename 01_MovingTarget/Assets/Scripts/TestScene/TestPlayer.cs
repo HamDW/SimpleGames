@@ -18,6 +18,7 @@ public class TestPlayer : MonoBehaviour
     void Awake()
     {
         m_OffsetPos = transform.position;
+        Cursor.visible = false;
     }
     // Start is called before the first frame update
     void Start()
@@ -29,7 +30,7 @@ public class TestPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_IsCanFire)
+        //if (m_IsCanFire)
             RotationGun();
     }
 
@@ -60,7 +61,7 @@ public class TestPlayer : MonoBehaviour
     public bool Fire()
     {
         m_gunAnimator.SetTrigger("Fire");
-        return RayCastTest2();
+        return RayCastTest();
     }
 
 
@@ -118,16 +119,13 @@ public class TestPlayer : MonoBehaviour
 
     public bool RayCastTest2()
     {
-        //RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
         RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity);
-        {
+        
             TestTarget2 kTarget = null;
             List<SHitInfo> list = new List<SHitInfo>();
             for (int i = 0; i < hits.Length; i++ )
             {
-                //CreateBullet(hit.point);
                 if (hits[i].collider.tag == "Target")
                 {
                     kTarget = hits[i].collider.GetComponent<TestTarget2>();
@@ -155,7 +153,7 @@ public class TestPlayer : MonoBehaviour
 
             if (list.Count > 0)
             {
-                list.Sort((a, b) => { return (a.nScore < b.nScore) ? 1 : -1; });   // 점수가 큰 순으로 정렬
+                list.Sort((a, b) => { return (a.nScore > b.nScore) ? -1 : 1; });   // 점수가 큰 순으로 정렬
                 kTarget.CheckHit2(list[0].vPos, list[0].nScore);
             }
 
@@ -163,12 +161,9 @@ public class TestPlayer : MonoBehaviour
 
             Debug.Log("Hit Count = " + list.Count);
 
-            //Debug.LogFormat("hit point = ({0}, {1}, {2})", hit.point.x, hit.point.y, hit.point.z);
-            //Vector3 vDir = hit.point - m_BulletStartPos.position;
-            //Debug.DrawRay(m_BulletStartPos.position, vDir, Color.red, 3.0f);
             return true;
-        }
-        return false;
+        
+        
     }
 
 
