@@ -14,7 +14,7 @@ public class TestGameUI : MonoBehaviour
     [HideInInspector] public bool m_bMoveStart = false;
 
 
-    //[SerializeField] SpriteRenderer m_sprMouseCursor = null;
+    [SerializeField] SpriteRenderer m_sprMouseCursor = null;
     float m_fFireDelay = 0;
     bool m_bFire = false;
 
@@ -59,7 +59,7 @@ public class TestGameUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Update_MouseCursor();
+        Update_MouseCursor();
 
         m_fFireDelay += Time.deltaTime;
 
@@ -100,15 +100,15 @@ public class TestGameUI : MonoBehaviour
         }
     }
 
-    //void Update_MouseCursor()
-    //{
-    //    Vector3 vPos = Input.mousePosition;
-    //    Camera kCamera = Camera.main;
-    //    vPos.z = -kCamera.transform.position.z;
+    void Update_MouseCursor()
+    {
+        Vector3 vPos = Input.mousePosition;
+        Camera kCamera = Camera.main;
+        vPos.z = -kCamera.transform.position.z;
 
-    //    Vector3 vWorld = kCamera.ScreenToWorldPoint(vPos);
-    //    m_sprMouseCursor.transform.position = vWorld;
-    //}
+        Vector3 vWorld = kCamera.ScreenToWorldPoint(vPos);
+        m_sprMouseCursor.transform.position = vWorld;
+    }
 
 
     //public void RayCastTestForMouseCursor()

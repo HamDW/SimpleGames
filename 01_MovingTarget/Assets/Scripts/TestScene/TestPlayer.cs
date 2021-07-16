@@ -103,32 +103,65 @@ public class TestPlayer : MonoBehaviour
         return false;
     }
 
+    public class SHitInfo
+    {
+        public Vector3 vPos;
+        public int nScore = 0;
+
+        public SHitInfo(Vector3 v, int score)
+        {
+            vPos = v;
+            nScore = score;
+        }
+
+    }
+
     public bool RayCastTest2()
     {
-        RaycastHit hit;
+        //RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity);
         {
-            for(int i = 0; i < hits.Length; i++ )
+            TestTarget2 kTarget = null;
+            List<SHitInfo> list = new List<SHitInfo>();
+            for (int i = 0; i < hits.Length; i++ )
             {
                 //CreateBullet(hit.point);
                 if (hits[i].collider.tag == "Target")
                 {
-                    TestTarget kTarget = hits[i].collider.GetComponent<TestTarget>();
+                    kTarget = hits[i].collider.GetComponent<TestTarget2>();
+
+                    SHitInfo kInfo = new SHitInfo(hits[i].point, 100);
+                    list.Add(kInfo);
+                }
+                else if (hits[i].collider.tag == "Target2")
+                {
+                    kTarget = hits[i].collider.transform.parent.GetComponent<TestTarget2>();
+
+                    SHitInfo kInfo = new SHitInfo(hits[i].point, 70);
+                    list.Add(kInfo);
+                }
+                if (hits[i].collider.tag == "Target3")
+                {
+                    kTarget = hits[i].collider.transform.parent.GetComponent<TestTarget2>();
+
                     
-                    kTarget.CheckHit(hits[i].point);
-
-
-                    //Destroy(hit.collider.gameObject, 0.02f);
+                    SHitInfo kInfo = new SHitInfo(hits[i].point, 50);
+                    list.Add(kInfo);
                 }
 
             }
 
-
-
+            if (list.Count > 0)
+            {
+                list.Sort((a, b) => { return (a.nScore < b.nScore) ? 1 : -1; });   // 점수가 큰 순으로 정렬
+                kTarget.CheckHit2(list[0].vPos, list[0].nScore);
+            }
 
             m_Audio.Play();
+
+            Debug.Log("Hit Count = " + list.Count);
 
             //Debug.LogFormat("hit point = ({0}, {1}, {2})", hit.point.x, hit.point.y, hit.point.z);
             //Vector3 vDir = hit.point - m_BulletStartPos.position;

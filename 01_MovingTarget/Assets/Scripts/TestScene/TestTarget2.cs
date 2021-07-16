@@ -52,4 +52,16 @@ public class TestTarget2 : MonoBehaviour
             m_HudUI.PrintScore2(50);
         }
     }
+
+    public void CheckHit2(Vector3 vHitWorldPos, int nScore)
+    {
+        //SphereCollider kCollider = GetComponent<SphereCollider>();
+        //Vector3 vPos = transform.InverseTransformPoint(vHitWorldPos);  // 타겟 기준 로컬 좌표로 변환
+       
+        m_Explosion.transform.position = vHitWorldPos;
+        m_Explosion.Play();
+
+        m_HudUI.PrintScore2(nScore);
+
+    }
 }

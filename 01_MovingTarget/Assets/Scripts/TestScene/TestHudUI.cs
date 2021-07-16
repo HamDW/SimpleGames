@@ -55,8 +55,8 @@ public class TestHudUI : MonoBehaviour
         // PrintDurationTime();
         PrintScore();
 
-        if (!m_IsFPS)
-            Update_MouseCursor();
+        //if (!m_IsFPS)
+        //    Update_MouseCursor();
     }
 
      
