@@ -82,10 +82,6 @@ public class CGun : MonoBehaviour
             CreateBullet(hit.point);
 
             m_Audio.Play();
-
-            //Debug.LogFormat("hit point = ({0}, {1}, {2})", hit.point.x, hit.point.y, hit.point.z);
-            //Vector3 vDir = hit.point - m_BulletStartPos.position;
-            //Debug.DrawRay(m_BulletStartPos.position, vDir, Color.red, 3.0f);
             return true;
         }
         return false;

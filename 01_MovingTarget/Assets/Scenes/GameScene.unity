@@ -812,9 +812,15 @@ MonoBehaviour:
   m_trOffstPos: {fileID: 881859445}
   m_prefabTarget: {fileID: 4471731570805539597, guid: 37f207028e1d21d499bf37b8cc242852, type: 3}
   m_TargetParent: {fileID: 680999977}
-  m_sprMouseCursor: {fileID: 1989180402}
   m_CreateDelay: 2
   m_bMoveStart: 0
+  m_TargetType: 1
+  m_sprMouseCursor: {fileID: 1989180402}
+  m_Left: -3
+  m_Right: 3
+  m_Bottom: 12
+  m_Up: 12
+  m_Depth: 20
 --- !u!1 &757662479
 GameObject:
   m_ObjectHideFlags: 0
@@ -1117,7 +1123,6 @@ MonoBehaviour:
   m_BulletParent: {fileID: 188574411}
   m_BulletStartPos: {fileID: 2026474506}
   m_gunAnimator: {fileID: 7931135122006179997}
-  m_sprMouseCursor: {fileID: 1989180402}
 --- !u!82 &863438615
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3557,6 +3562,10 @@ PrefabInstance:
     - target: {fileID: 4471731570805539597, guid: 37f207028e1d21d499bf37b8cc242852, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6548310435966713375, guid: 37f207028e1d21d499bf37b8cc242852, type: 3}
+      propertyPath: m_TargetType
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37f207028e1d21d499bf37b8cc242852, type: 3}

@@ -1,3 +1,5 @@
+#define DUSE_UPGRADE
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +16,6 @@ public class GameUI : MonoBehaviour
     [HideInInspector] public bool m_bMoveStart = false;
 
 
-    [SerializeField] SpriteRenderer m_sprMouseCursor = null;
     float m_fFireDelay = 0;
     bool m_bFire = false;
 
@@ -38,8 +39,9 @@ public class GameUI : MonoBehaviour
     {
         while( m_bMoveStart )
         {
-            CreateTarget();
-            
+            //SCreateTarget();
+            SelectCreateTarget();
+
             yield return new WaitForSeconds(m_CreateDelay); //0.3f
         }
     }
@@ -52,7 +54,7 @@ public class GameUI : MonoBehaviour
         go.transform.localScale = m_prefabTarget.transform.localScale;
 
         CTarget kTarget = go.GetComponent<CTarget>();
-        kTarget.Initialize(true);
+        kTarget.Initialize(false);
     }
 
 
@@ -103,6 +105,61 @@ public class GameUI : MonoBehaviour
         }
     }
 
+#if DUSE_UPGRADE
+
+    public enum ETargetType
+    {
+        eLine1 = 1,         // 한줄로 나오기
+        eLineMulti,         // 여러줄로 나오기
+        eRandomMove,        // 랜덤으로 방향 설정후 이동하기
+    }
+
+    public ETargetType m_TargetType = ETargetType.eLine1;       // 타겟 출현 방식
+
+    [SerializeField] SpriteRenderer m_sprMouseCursor = null;
+
+    [Header("타겟 생성 범위")]
+    public float m_Left = -3.0f;       // 왼쪽
+    public float m_Right = 3.0f;       // 오른쪽
+    public float m_Bottom = 12.0f;       // 하단
+    public float m_Up = 12.0f;          // 상단
+    public float m_Depth = 20.0f;       // 깊이( z값 )
+
+    public void CreateTarget2()
+    {
+        GameObject go = Instantiate(m_prefabTarget, m_TargetParent);
+        go.transform.position = RandomPos();
+        go.transform.localScale = m_prefabTarget.transform.localScale;
+
+        CTarget kTarget = go.GetComponent<CTarget>();
+        kTarget.Initialize(true);
+    }
+
+    private Vector3 RandomPos()
+    {
+        int x = Random.Range((int)m_Left, (int)m_Right);
+        int y = Random.Range((int)m_Bottom, (int)m_Up);
+        int z = Random.Range((int)m_Depth - 10, (int)m_Depth + 8);
+
+        return new Vector3(x, y, z);
+    }
+
+
+    public void SelectCreateTarget()
+    {
+        switch( m_TargetType )
+        {
+            case ETargetType.eLine1:
+                CreateTarget();
+                break;
+            case ETargetType.eLineMulti:
+                break;
+            case ETargetType.eRandomMove:
+                CreateTarget2();
+                break;
+        }
+    }
+
     void Update_MouseCursor()
     {
         Vector3 vPos = Input.mousePosition;
@@ -113,7 +170,7 @@ public class GameUI : MonoBehaviour
         m_sprMouseCursor.transform.position = vWorld;
     }
 
-
+#endif
     //public void RayCastTestForMouseCursor()
     //{
     //    RaycastHit hit;

@@ -48,10 +48,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Body: {fileID: 7345757181373176330}
-  m_Speed: 1
   m_Explosion: {fileID: 2929889688006075158}
   m_IsDead: 0
   m_bMove: 0
+  m_Speed: 1
+  m_TargetType: 1
 --- !u!65 &7647160114818662215
 BoxCollider:
   m_ObjectHideFlags: 0
