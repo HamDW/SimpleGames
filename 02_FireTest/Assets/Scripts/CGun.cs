@@ -12,7 +12,7 @@ public class CGun : MonoBehaviour
     private bool m_IsCanFire = false;                       // 사격 가능한가?
     private AudioSource m_Audio = null;
 
-    private Vector3 m_OffsetPos;
+    private Vector3 m_OffsetPos;                       // 총의 초기 위치
 
     void Awake()
     {

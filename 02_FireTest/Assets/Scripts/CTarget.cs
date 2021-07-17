@@ -10,7 +10,7 @@ public class CTarget : MonoBehaviour
     [HideInInspector] public bool m_IsDead = false;           // 충돌 2번 되는것 방지
 
     Vector3 m_vDir = Vector3.zero;
-    float m_Speed = 1.0f;
+    public float m_Speed = 1.0f;
     
     // Start is called before the first frame update
     void Start()
