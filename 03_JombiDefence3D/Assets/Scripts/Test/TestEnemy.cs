@@ -27,7 +27,6 @@ public class TestEnemy : MonoBehaviour
             m_Animator = GetComponent<Animator>();
 
        // Destroy(gameObject, 60.0f);
-
         if (m_Target != null)
         {
             m_vDir = m_Target.transform.position - transform.position;
@@ -61,7 +60,10 @@ public class TestEnemy : MonoBehaviour
             transform.Translate(m_vDir * m_Speed * Time.deltaTime, Space.World);
 
         if (IsAni_Damage())
-            transform.Translate(-m_vDir * m_Speed * Time.deltaTime * 3, Space.World);       // 총 맞으면 뒤로 물러나기
+        {
+            m_vDir.y = 0;
+            transform.Translate(-m_vDir * m_Speed * Time.deltaTime * 20, Space.World);       // 총 맞으면 뒤로 물러나기
+        }
 
     }
 
@@ -164,7 +166,7 @@ public class TestEnemy : MonoBehaviour
     void Update()
     {
         //CheckPlayer();
-        //Move();
+        Move();
 
 #if DUSE_TEST
 
